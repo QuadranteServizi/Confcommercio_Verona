@@ -38,7 +38,27 @@ var app = {
         
         //Area di gestione notifiche
         var pushNotification = window.plugins.pushNotification;
-        pushNotification.register(app.successHandler, app.errorHandler,{"senderID":"1073127551296","ecb":"app.onNotificationGCM"});
+        
+        if ( device.platform == 'android' || device.platform == 'Android' )
+          {
+              pushNotification.register(
+                  successHandler,
+                  errorHandler, {
+                      "senderID":"1073127551296",
+                      "ecb":"onNotificationGCM"
+                  });
+          }
+          else
+          {
+              pushNotification.register(
+                  tokenHandler,
+                  errorHandler, {
+                      "badge":"true",
+                      "sound":"true",
+                      "alert":"true",
+                      "ecb":"onNotificationAPN"
+                  });
+          }
     },
 
     // Update DOM on a Received Event
@@ -57,6 +77,31 @@ var app = {
     errorHandler:function(error) {
         alert(error);
     },
+    function tokenHandler (result) {
+      // Your iOS push server needs to know the token before it can push to this device
+      // here is where you might want to send it the token for later use.
+      alert('device token = ' + result);
+    },
+    // iOS
+    onNotificationAPN: function(event) {
+        var pushNotification = window.plugins.pushNotification;
+        console.log("Received a notification! " + event.alert);
+        console.log("event sound " + event.sound);
+        console.log("event badge " + event.badge);
+        console.log("event " + event);
+        if (event.alert) {
+            navigator.notification.alert(event.alert);
+        }
+        if (event.badge) {
+            console.log("Set badge on  " + pushNotification);
+            pushNotification.setApplicationIconBadgeNumber(this.successHandler, event.badge);
+        }
+        if (event.sound) {
+            var snd = new Media(event.sound);
+            snd.play();
+        }
+    },
+    //Andriod
     onNotificationGCM: function(e) {
         switch( e.event )
         {
