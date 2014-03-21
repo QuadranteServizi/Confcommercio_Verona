@@ -38,9 +38,10 @@ var app = {
         
         //Area di gestione notifiche
         var pushNotification = window.plugins.pushNotification;
-        
+        alert("Che OS usi?");
         if ( device.platform == 'android' || device.platform == 'Android' )
           {
+              alert("Sei su Andriod!");
               pushNotification.register(
                   successHandler,
                   errorHandler, {
@@ -50,6 +51,7 @@ var app = {
           }
           else
           {
+          alert("Sei su iOS!");
               pushNotification.register(
                   tokenHandler,
                   errorHandler, {
