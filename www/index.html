@@ -12,13 +12,12 @@
         <script type="text/javascript" src="js/des.js"></script> 
         
         <script type="text/javascript" charset="utf-8">
-        //Da qui parte tutto
-        document.addEventListener("offline", onOffline, false);
-        document.addEventListener("online", onOnline, false);  
-        document.addEventListener("deviceready", checkLogin, false);
-        </script>   
-
-        <script type="text/javascript" charset="utf-8">
+          //Da qui parte tutto
+          document.addEventListener("offline", onOffline, false);
+          document.addEventListener("online", onOnline, false);  
+          document.addEventListener("deviceready", checkLogin, false);
+        
+         //------------Funzioni-----------------------------------------
         
           function onOffline() {
               window.location.replace("offline.html");
