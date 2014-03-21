@@ -10,7 +10,7 @@
 
         
         <script type="text/javascript" src="PushNotification.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
+      <!--  <script type="text/javascript" src="js/index.js"></script>-->
         <script type="text/javascript" src="js/des.js"></script>    
          <script type="text/javascript">
                     app.initialize();
@@ -42,20 +42,12 @@
             fs.root.getFile('confcommercio_config.db', {create: true, exclusive: false},
                             gotFileEntry, fail);
         }
-        
-                
+                     
         function gotFileEntry(fileEntry) {
             var fail = failCB('createWriter');
             file.entry = fileEntry;
-        
-           // fileEntry.createWriter(gotFileWriter, fail);
             readText();
         }
-        
-     /*   function gotFileWriter(fileWriter) {
-            file.writer.available = true;
-            file.writer.object = fileWriter;
-        }   */
 
         function readText() {
             if (file.entry) {
@@ -112,14 +104,9 @@
                 }, failCB("FileReader"));
             }
         }
-        
-
-        
-    
         </script>
         
         <script type="text/javascript" charset="utf-8">
-
           document.addEventListener("deviceready", checkLogin, false);
           document.addEventListener("offline", onOffline, false);
           document.addEventListener("online", onOnline, false);
@@ -129,8 +116,138 @@
               //guardo il file
               var fail = failCB('requestFileSystem');
               window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+              
+              //sezione notifiche, sostituisce index.js che con iOS non va più
+              try 
+        				{ 
+                   
+                  var pushNotification = window.plugins.pushNotification;
+                  alert("Che OS usi?");
+                  if ( device.platform == 'android' || device.platform == 'Android' )
+                    {
+                        alert("Sei su Andriod!");
+                        pushNotification.register(
+                            successHandler,
+                            errorHandler, {
+                                "senderID":"1073127551296",
+                                "ecb":"onNotificationGCM"
+                            });
+                    }
+                    else
+                    {
+                    alert("Sei su iOS!");
           
-          }
+                    pushNotification.register(
+                           tokenHandler, 
+                           errorHandler, {
+                           "badge":"true",
+                           "sound":"true",
+                           "alert":"true",
+                           "ecb":"onNotificationAPN"
+                          });	// required!
+                    alert("fatto!");
+                    }
+              }
+        			catch(err) 
+        				{ 
+        					txt="There was an error on this page.\n\n"; 
+        					txt+="Error description: " + err.message + "\n\n"; 
+        					alert(txt); 
+        				}
+          
+          }//cose iniziali
+          
+        function receivedEvent(id) {
+        var parentElement = document.getElementById(id);
+        var listeningElement = parentElement.querySelector('.listening');
+        var receivedElement = parentElement.querySelector('.received');
+        listeningElement.setAttribute('style', 'display:none;');
+        receivedElement.setAttribute('style', 'display:block;');
+        console.log('Received Event: ' + id);      
+    }
+    // result contains any message sent from the plugin call
+    function successHandler(result) {
+     //   alert('Callback Success! Result = '+result)
+    }
+    function errorHandler(error) {
+        alert(error);
+    },
+    function tokenHandler(result) {
+      // Your iOS push server needs to know the token before it can push to this device
+      // here is where you might want to send it the token for later use.
+      alert('device token = ' + result);
+    }
+    
+    // iOS
+    function onNotificationAPN(event) {
+        var pushNotification = window.plugins.pushNotification;
+        console.log("Received a notification! " + event.alert);
+        console.log("event sound " + event.sound);
+        console.log("event badge " + event.badge);
+        console.log("event " + event);
+        if (event.alert) {
+            navigator.notification.alert(event.alert);
+        }
+        if (event.badge) {
+            console.log("Set badge on  " + pushNotification);
+            pushNotification.setApplicationIconBadgeNumber(this.successHandler, event.badge);
+        }
+        if (event.sound) {
+            var snd = new Media(event.sound);
+            snd.play();
+        }
+    },
+    //Andriod
+    function onNotificationGCM(e) {
+        switch( e.event )
+        {
+            case 'registered':
+                if ( e.regid.length > 0 )
+                {
+ 
+                    //Quando il device è pronto lo inserisco nel database delle notifiche
+                    var url='http://www.confcommercioverona.it/app/notify_newdevice.php?deviceid='+device.uuid+'&platform='+device.platform+'&model='+device.model+'&registrationId='+e.regid;
+                    var ref = window.open(url, '_blank','hidden=yes');
+                    ref.addEventListener('loadstart', function() {});
+                    ref.addEventListener('loadstop', function() {});
+                    ref.addEventListener('exit', function() {}); 
+                    // close InAppBrowser after 5 seconds
+                    setTimeout(function() {
+                      ref.close();
+                    }, 5000);     
+
+
+                }
+                break;
+
+                //questo è il comportamento che segue quando viene ricevuta una notifica
+            case 'message':
+                // this is the actual push notification. its format depends on the data model from the push server
+                var str = e.message;
+                var res = str.split("***");
+
+                    var x="";
+                    var r=confirm(res[0]);
+                    if (r==true)
+                      {
+                      
+                      var notify_news_id=res[1]; //  id del contenuto joomla da notificare
+                      //qui per aprire la notifica in app
+                      window.open("apri.html?notify_id="+notify_news_id,"_self","location=yes");
+                      }
+
+                break;
+
+            case 'error':
+                alert('GCM error = '+e.msg);
+                break;
+
+            default:
+                alert('An unknown GCM event has occurred');
+                break;
+        }
+    }
+
           
           function onOffline() {
               window.location.replace("offline.html");
@@ -138,7 +255,7 @@
           function onOnline() {
               
           }
-          
+            
         </script>
 
     </head> 

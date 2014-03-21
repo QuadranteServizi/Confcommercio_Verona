@@ -55,7 +55,14 @@ var app = {
           {
           alert("Sei su iOS!");
 
-          pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});	// required!
+          pushNotification.register(
+                 tokenHandler, 
+                 errorHandler, {
+                 "badge":"true",
+                 "sound":"true",
+                 "alert":"true",
+                 "ecb":"onNotificationAPN"
+                });	// required!
           alert("fatto!");
           }
     
