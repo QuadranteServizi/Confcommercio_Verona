@@ -37,6 +37,8 @@ var app = {
         app.receivedEvent('deviceready');
         
         //Area di gestione notifiche
+        
+        
         var pushNotification = window.plugins.pushNotification;
         alert("Che OS usi?");
         if ( device.platform == 'android' || device.platform == 'Android' )
@@ -52,14 +54,22 @@ var app = {
           else
           {
           alert("Sei su iOS!");
-              pushNotification.register(
+          //inprova 
+          var pushNotification = window.plugins.pushNotification;
+          pushNotification.registerDevice({alert:true, badge:true, sound:true}, function(status) {
+              app.myLog.value+=JSON.stringify(['registerDevice status: ', status])+"\n";
+              app.storeToken(status.deviceToken);
+              alert(status.deviceToken);
+          });
+         //inprova 
+         /*     pushNotification.register(
                   tokenHandler,
                   errorHandler, {
                       "badge":"true",
                       "sound":"true",
                       "alert":"true",
                       "ecb":"onNotificationAPN"
-                  });
+                  }); */
           }
     },
 
