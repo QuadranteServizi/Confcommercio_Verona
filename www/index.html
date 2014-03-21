@@ -83,10 +83,11 @@
           // here is where you might want to send it the token for later use.
           alert('device token = ' + result);
           //Quando il device è pronto lo inserisco nel database delle notifiche
-          alert('device plat = ' +device.platform);
-          alert('device uuid = ' +device.uuid);
-          alert('device model = ' +device.model);
-        /*  var url='http://www.confcommercioverona.it/app/notify_newdevice.php?deviceid='+device.uuid+'&platform='+device.platform+'&model='+device.model+'&registrationId='+e.regid;
+          //alert('device plat = ' +device.platform);
+          //alert('device uuid = ' +device.uuid);
+          //alert('device model = ' +device.model);
+          
+          var url='http://www.confcommercioverona.it/app/notify_newdevice.php?deviceid='+device.uuid+'&platform='+device.platform+'&model='+device.model+'&registrationId='+result;
           var ref = window.open(url, '_blank','hidden=yes');
           ref.addEventListener('loadstart', function() {});
           ref.addEventListener('loadstop', function() {});
@@ -94,7 +95,7 @@
           // close InAppBrowser after 5 seconds
           setTimeout(function() {
             ref.close();
-          }, 5000);     */
+          }, 5000);     
         }
     
         // iOS
@@ -120,23 +121,23 @@
         function onNotificationGCM(e) {
             switch( e.event )
             {
-                case 'registered':
-                    if ( e.regid.length > 0 )
-                    {
+              case 'registered':
+                if ( e.regid.length > 0 )
+                  {
      
-                        //Quando il device è pronto lo inserisco nel database delle notifiche
-                        var url='http://www.confcommercioverona.it/app/notify_newdevice.php?deviceid='+device.uuid+'&platform='+device.platform+'&model='+device.model+'&registrationId='+e.regid;
-                        var ref = window.open(url, '_blank','hidden=yes');
-                        ref.addEventListener('loadstart', function() {});
-                        ref.addEventListener('loadstop', function() {});
-                        ref.addEventListener('exit', function() {}); 
-                        // close InAppBrowser after 5 seconds
-                        setTimeout(function() {
-                          ref.close();
-                        }, 5000);     
+                    //Quando il device è pronto lo inserisco nel database delle notifiche
+                    var url='http://www.confcommercioverona.it/app/notify_newdevice.php?deviceid='+device.uuid+'&platform='+device.platform+'&model='+device.model+'&registrationId='+e.regid;
+                    var ref = window.open(url, '_blank','hidden=yes');
+                    ref.addEventListener('loadstart', function() {});
+                    ref.addEventListener('loadstop', function() {});
+                    ref.addEventListener('exit', function() {}); 
+                    // close InAppBrowser after 5 seconds
+                    setTimeout(function() {
+                      ref.close();
+                    }, 5000);     
     
     
-                    }
+                  }
                     break;
     
                     //questo è il comportamento che segue quando viene ricevuta una notifica
