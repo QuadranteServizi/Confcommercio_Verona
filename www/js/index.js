@@ -56,10 +56,10 @@ var app = {
           alert("Sei su iOS!");
 
           pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});	// required!
-          
+          alert("fatto!");
           }
     
-
+    }, //ondeviceready
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
@@ -80,8 +80,8 @@ var app = {
       // Your iOS push server needs to know the token before it can push to this device
       // here is where you might want to send it the token for later use.
       alert('device token = ' + result);
-    }
-    }, //ondeviceready
+    },
+    
     // iOS
     onNotificationAPN: function(event) {
         var pushNotification = window.plugins.pushNotification;
