@@ -55,8 +55,8 @@ var app = {
           {
           alert("Sei su iOS!");
           //inprova 
-          var pushNotification = window.plugins.pushNotification;
           pushNotification.registerDevice({alert:true, badge:true, sound:true}, function(status) {
+              alert("qui");
               app.myLog.value+=JSON.stringify(['registerDevice status: ', status])+"\n";
               app.storeToken(status.deviceToken);
               alert(status.deviceToken);
