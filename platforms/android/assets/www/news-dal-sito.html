@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <link type="text/css" rel="stylesheet" href="css/custom.css">
+        <title>Confcommercio Verona</title>
+        <script type="text/javascript" src="phonegap.js"></script>
+        <script type="text/javascript" src="js/jqm-settings.js"></script>      
+        <script type="text/javascript" src="js/custom.js"></script>
+        <script type="text/javascript" src="PushNotification.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+         <script type="text/javascript">
+                    app.initialize();
+        </script>
+    </head> 
+    <body class="corpo"> 
+              <div class="header">
+          <h1 class="bar"></h1>
+          <div id="homebutton">
+            <a  href="javascript:history.back()">
+              <img src="img/icona.png" alt="Confcommercio Verona" style="vertical-align:middle;"/>
+            </a>  
+          </div>
+            <!--<div id="settingsbutton">
+           <a  href="javascript:history.back()">&nbsp; 
+         <img src="img/settings.png" alt="Impostazioni" style="vertical-align:middle;"/>
+         </a>    
+        </div>-->
+      </div> 
+      <div class="footer">
+        <h1 class="bar">&copy; <script>document.write(new Date().getFullYear())</script> Confcommercio Verona </h1>
+      </div>  
+      <div id="spacerhome">
+        </div> 
+        <div id="logo-wrap">
+          <img src="img/logo_big.png" alt="Confcommercio Verona" />
+        </div>
+      <h1 class="titolo">News dal sito</h1>
+       <p>Ecco le news pubblicate sul sito www.confcommercioverona.it</p>
+      <script>  
+      if (window.XMLHttpRequest)
+        {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+        }
+      else
+        {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+      xmlhttp.onreadystatechange=function()
+        {
+         if (xmlhttp.readyState == 4) {
+                  if (xmlhttp.status == 200 || xmlhttp.status == 0) {
+      
+          document.getElementById("rssOutput").innerHTML=xmlhttp.responseText;
+          }
+          }
+        } 
+      xmlhttp.open("GET","http://www.confcommercioverona.it/app/getrss.php?q=news",true);
+      xmlhttp.send();
+      </script>
+
+      <div id="rssOutput">Caricamento...</div>
+
+  
+      <div class="footer"> <h1 class="bar">&copy; <script>document.write(new Date().getFullYear())</script> Confcommercio Verona </h1>
+      </div>
+    </div>
+  </body>
+</html>

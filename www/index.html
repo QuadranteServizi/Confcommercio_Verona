@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <link type="text/css" rel="stylesheet" href="css/custom.css">
+        <title>Confcommercio Verona</title>
+        <script type="text/javascript" src="phonegap.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/OptionsMenu.js"/>
+
+        
+        <script type="text/javascript" src="PushNotification.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/des.js"></script>    
+         <script type="text/javascript">
+                    app.initialize();
+                  
+        </script>
+        
+        <script>
+        /*Sezione che legge il file di configurazione, verifica se le credenziali hanno accesso a Joomla 
+          e in caso positivo permette l'utilizzo dell'APP
+            in caso negativo rimanda alla pagina delle impostazioni
+        */
+
+        $ = function (id) {
+            return document.getElementById(id);
+        },
+        file = {
+            writer: { available: false },
+            reader: { available: false }
+        },
+        dbEntries = [];
+        
+        var failCB = function (msg) {
+            return function () {
+                alert('[FAIL] ' + msg);
+            }
+        };
+        
+        function gotFS(fs) {
+            var fail = failCB('getFile');
+            fs.root.getFile('confcommercio_config.db', {create: true, exclusive: false},
+                            gotFileEntry, fail);
+        }
+        
+                
+        function gotFileEntry(fileEntry) {
+            var fail = failCB('createWriter');
+            file.entry = fileEntry;
+        
+           // fileEntry.createWriter(gotFileWriter, fail);
+            readText();
+        }
+        
+     /*   function gotFileWriter(fileWriter) {
+            file.writer.available = true;
+            file.writer.object = fileWriter;
+        }   */
+
+        function readText() {
+            if (file.entry) {
+                file.entry.file(function (dbFile) {
+                    
+                    var user="";
+                    var pass="";
+                    var not="";
+                    
+                    var reader = new FileReader();
+                    
+                  
+                    reader.onloadend = function (evt) {
+
+                        var textArray = evt.target.result.split("***");
+                        user = textArray[0];
+                        pass = textArray[1];
+                        not = textArray[2];
+                        
+                        dbEntries = textArray.concat(dbEntries);
+                    
+                    if (typeof user === 'undefined'){user="";}
+                    if (typeof pass === 'undefined'){pass="";}
+                    
+                  
+                    
+                    if(user.length==0 && pass.length==0){
+                       window.location.replace("login.html");
+                    }else{
+                      //Cripto username e password per l'invio
+                      var key = "cd027Kgh";
+                      var crp_usr = stringToHex(des(key, user, 1, 0));
+                      var crp_pwd = stringToHex(des(key, pass, 1, 0));
+                      //Verifico che le credenziali siano giuste
+                      var url='http://www.confcommercioverona.it/app/check_login.php?usr='+crp_usr+'&pwd='+crp_pwd;
+                      if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+                          var http=new XMLHttpRequest();
+                      } 
+                      else {
+                          var http=new ActiveXObject("Microsoft.XMLHTTP");
+                      }
+                      
+                      http.open('HEAD', url, false);
+                      http.send();
+                      if (http.status==404){
+                        window.location.replace("login.html");
+                      }   
+                    }
+                    
+                   
+                    }
+                    
+                    reader.readAsText(dbFile);
+                }, failCB("FileReader"));
+            }
+        }
+        
+
+        
+    
+        </script>
+        
+        <script type="text/javascript" charset="utf-8">
+
+          document.addEventListener("deviceready", checkLogin, false);
+          document.addEventListener("offline", onOffline, false);
+          document.addEventListener("online", onOnline, false);
+          
+          function checkLogin() {
+                            
+              //guardo il file
+              var fail = failCB('requestFileSystem');
+              window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+          
+          }
+          
+          function onOffline() {
+              window.location.replace("offline.html");
+          }
+          function onOnline() {
+              
+          }
+          
+        </script>
+
+    </head> 
+    <body class="corpo">
+     <div class="header">
+        <h1 class="bar"></h1>
+            <div id="homebutton">
+        <a  href="javascript:history.back()">
+             <img src="img/icona.png" alt="Confcommercio Verona" style="vertical-align:middle;"/>
+        </a>  
+  
+        </div>
+      </div> 
+      <div class="footer">
+        <h1 class="bar">&copy; <script>document.write(new Date().getFullYear())</script> Confcommercio Verona </h1>
+      </div>  
+      <div id="spacerhome">
+        </div> 
+        <div id="logo-wrap">
+          <img src="img/logo_big.png" alt="Confcommercio Verona" />
+        </div>
+        <div id="menu">
+        <ul>
+        
+          <li>
+          <a href="rassegna-stampa.html">Rassegna Stampa</a>
+          </li>
+          
+          <li>
+          <a href="video.html">Video</a>
+          </li> 
+          <li>
+          <a href="news-dal-sito.html">News dal sito</a>
+          </li>
+          <li>
+          <a href="corsi.html">Corsi di formazione</a>
+          </li>
+          <li>
+          <a href="il-commercio-veronese.html">Il Commercio Veronese</a>
+          </li>
+          <li>
+          <a href="prime-pagine.html">Prime Pagine Quotidiani</a>
+          </li>
+         
+        </ul>
+        <div>
+      </div>       
+      <div class="app"> 
+            <div id="deviceready" class="blink">
+                <p class="event listening"> </p>
+                <p class="event received"> </p>
+            </div>
+       </div>     
+    </div>
+      <p id="debug">
+    </p> 
+
+  </body>
+</html>

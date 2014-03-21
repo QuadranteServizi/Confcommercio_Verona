@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>    
+  <head>        
+    <meta charset="utf-8" />        
+    <meta name="viewport" content="width=device-width, user-scalable=no">        
+    <link type="text/css" rel="stylesheet" href="css/custom.css">        
+    <title>Confcommercio Verona
+    </title>                                           
+<script type="text/javascript" src="PushNotification.js"></script>         
+<script type="text/javascript" src="js/index.js"></script>         
+<script type="text/javascript">
+                    app.initialize();
+        </script>                  
+<script type="text/javascript" charset="utf-8" src="js/OptionsMenu.js"/></script>                        
+  </head>      
+  <body class="corpo">         
+    <div class="header">        
+      <h1 class="bar">Confcommercio Verona</h1>            
+      <div id="homebutton">        
+        <a  href="javascript:history.back()">             
+          <img src="img/icona.png" alt="Confcommercio Verona" style="vertical-align:middle;"/>        </a>              
+      </div>      
+    </div>        
+    <div class="footer">        
+      <h1 class="bar">&copy; 
+<script>document.write(new Date().getFullYear()); 
+        
+        </script> Confcommercio Verona </h1>      
+    </div>         
+    <div id="spacerhome">        
+    </div>          
+    <div id="logo-wrap">          
+      <img src="img/logo_big.png" alt="Confcommercio Verona" />        
+    </div>     
+    
+
+<h1 class="titolo">Configurazione</h1>
+       <div align="center">
+       <p>Credenziali di accesso al sito web www.confcommercioverona.it</p> <br>
+
+    <form onsubmit="return saveText()" action="#">
+        <label for="username">Username</label><br>
+        <input id="username" /><br>
+                                                    <br>
+        <label for="password">Password</label><br>
+        <input id="password" type="password" /><br>
+        <br>
+                <label for="checkbox">Notifiche</label>
+        <input type="checkbox" id="ricevinotifiche"> <br>  <br>
+        <input type="submit" value="Salva" />
+        
+
+    </form>
+
+    <p id="definitions">
+    </p>
+    </div>
+    <script src="phonegap.js"></script>
+<script>
+
+
+/*Preso da http://blog.safaribooksonline.com/2012/02/29/phonegap-storing-and-retrieving-with-the-filesystem/ */
+    var FILENAME = 'confcommercio_config.db',
+        $ = function (id) {
+            return document.getElementById(id);
+        },
+        file = {
+            writer: { available: false },
+            reader: { available: false }
+        },
+        dbEntries = [];
+
+    function saveText(e) {
+    
+      $('definitions').innerHTML = "Salvataggio in corso...";
+      var username = $('username').value,
+          password = $('password').value,
+          ricevinotifiche = $('ricevinotifiche').value,
+          fail;
+  
+      dbEntries.push(username + '***' + password + '***'+ ricevinotifiche);
+    //  $('username').value = '';
+    //  $('password').value = '';
+    //  $('ricevinotifiche').value = '';
+  
+      if (file.writer.available) {
+         file.writer.available = false;
+         file.writer.object.onwriteend = function (evt) {
+                    file.writer.available = true; 
+                    file.writer.object.seek(0); 
+                   } 
+            file.writer.object.write(username + '***' + password + '***'+ ricevinotifiche); 
+
+            $('definitions').innerHTML = "Impostazioni salvate con successo!";
+            var element = document.getElementById('definitions');
+        element.innerHTML = 'Device Name: '     + device.name     + '<br />' +
+                            'Device Cordova: '  + device.cordova  + '<br />' +
+                            'Device Platform: ' + device.platform + '<br />' +
+                            'Device UUID: '     + device.uuid     + '<br />' +
+                            'Device Model: '    + device.model    + '<br />' +
+                            'Device Version: '  + device.version  + '<br />';
+    
+
+          
+            
+         
+            
+                
+   } 
+   return false; }
+   
+   window.setTimeout("closeDefinitions();", 5000);
+
+            function closeDefinitions(){
+                  document.getElementById("definitions").style.display="none";
+            }
+</script>
+<script>
+var failCB = function (msg) {
+    return function () {
+        alert('[FAIL] ' + msg);
+    }
+};
+
+function gotFS(fs) {
+    var fail = failCB('getFile');
+    fs.root.getFile(FILENAME, {create: true, exclusive: false},
+                    gotFileEntry, fail);
+}
+
+
+function gotFileWriter(fileWriter) {
+    file.writer.available = true;
+    file.writer.object = fileWriter;
+}
+
+function readText() {
+    if (file.entry) {
+        file.entry.file(function (dbFile) {
+            var reader = new FileReader();
+            reader.onloadend = function (evt) {
+                var textArray = evt.target.result.split("***");
+                var user = textArray[0];
+                var pass = textArray[1];
+                var not = textArray[2];
+
+                dbEntries = textArray.concat(dbEntries);
+            
+            document.getElementById('username').value=user;
+            if (pass=="undefined"){
+              document.getElementById('password').value="";
+            }else{
+              document.getElementById('password').value=pass;
+            }
+            
+            document.getElementById('ricevinotifiche').checked=not;
+            }
+            reader.readAsText(dbFile);
+        }, failCB("FileReader"));
+    }
+}
+
+
+function gotFileEntry(fileEntry) {
+    var fail = failCB('createWriter');
+    file.entry = fileEntry;
+
+    fileEntry.createWriter(gotFileWriter, fail);
+    readText();
+}
+
+
+document.addEventListener('deviceready', function () {
+    var fail = failCB('requestFileSystem');
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+    
+
+}, false);
+</script>
+</body>
+</html>

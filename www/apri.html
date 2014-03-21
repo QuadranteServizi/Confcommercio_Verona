@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <link type="text/css" rel="stylesheet" href="css/custom.css">
+        <title>Confcommercio Verona</title>
+        <script type="text/javascript" src="phonegap.js"></script>
+        <script type="text/javascript" src="js/jqm-settings.js"></script>      
+        <script type="text/javascript" src="js/custom.js"></script>
+        <script type="text/javascript" src="PushNotification.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+         <script type="text/javascript">
+                    app.initialize();
+        </script>
+    </head> 
+    <body class="corpo"> 
+              <div class="header">
+          <h1 class="bar"></h1>
+          <div id="homebutton">
+            <a  href="javascript:history.back()">
+              <img src="img/icona.png" alt="Confcommercio Verona" style="vertical-align:middle;"/>
+            </a>  
+          </div>
+  <!--<div id="settingsbutton">
+           <a  href="javascript:history.back()">&nbsp; 
+         <img src="img/settings.png" alt="Impostazioni" style="vertical-align:middle;"/>
+         </a>    
+        </div>-->
+      </div> 
+      <div class="footer">
+        <h1 class="bar">&copy; <script>document.write(new Date().getFullYear())</script> Confcommercio Verona </h1>
+      </div>  
+      <div id="spacerhome">
+        </div> 
+        <div id="logo-wrap">
+          <img src="img/logo_big.png" alt="Confcommercio Verona" />
+        </div>
+      
+    <p>
+    </p>
+    
+  <script>  
+  
+  function getUrlVars() {
+      var vars = {};
+      var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+          vars[key] = value;
+      });
+      return vars;
+  }
+  
+  
+  if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+    }
+  else
+    {// code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+  xmlhttp.onreadystatechange=function()
+    {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200)
+      {
+      document.getElementById("rssOutput").innerHTML=xmlhttp.responseText;
+      }
+    } 
+    var elle = getUrlVars()["l"];
+    var news_id = getUrlVars()["news_id"];
+    var corsi_id = getUrlVars()["corsi_id"];
+    var notify_id = getUrlVars()["notify_id"];
+  
+  if (elle){  
+    xmlhttp.open("GET","http://www.confcommercioverona.it/app/getrss.php?q=primepagine&l="+elle+"",true);
+  }else
+  if (news_id){  
+    xmlhttp.open("GET","http://www.confcommercioverona.it/app/getrss.php?q=news&news_id="+news_id+"",true);
+  }
+  if (corsi_id){  
+    xmlhttp.open("GET","http://www.confcommercioverona.it/app/getrss.php?q=corsi&corsi_id="+corsi_id+"",true);
+  }
+  if (notify_id){  
+    if(notify_id.substring(0,6)=="corso-"){
+      xmlhttp.open("GET","http://www.confcommercioverona.it/app/getrss.php?q=corsi&corsi_id="+notify_id.substring(6)+"",true);
+    }else{
+      xmlhttp.open("GET","http://www.confcommercioverona.it/app/getrss.php?q=news&news_id="+notify_id+"",true);
+    } 
+    
+  }
+  
+  xmlhttp.send();
+  </script>
+
+  <div id="rssOutput">Caricamento...</div>
+   
+      <div class="footer"> <h1 class="bar">&copy; <script>document.write(new Date().getFullYear())</script> Confcommercio Verona </h1>
+      </div>
+    </div>
+  </body>
+</html>

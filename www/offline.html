@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <link type="text/css" rel="stylesheet" href="css/custom.css">
+        <title>Confcommercio Verona</title>
+        <script type="text/javascript" src="phonegap.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/OptionsMenu.js"/>
+
+        
+        <script type="text/javascript" src="PushNotification.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+         <script type="text/javascript">
+                    app.initialize();
+                  
+        </script>
+        <script type="text/javascript" charset="utf-8">
+
+          // Wait for PhoneGap to load
+          // 
+          document.addEventListener("deviceready", onDeviceReady, false);
+          
+          // PhoneGap is loaded and it is now safe to make calls PhoneGap methods
+          //
+          function onDeviceReady() {
+              checkConnection();
+          }
+          
+          
+          document.addEventListener("online", onOnline, false);
+          
+          function checkConnection() {
+              var networkState = navigator.network.connection.type;
+          
+              var states = {};
+              states[Connection.UNKNOWN]  = 'Unknown connection';
+              states[Connection.ETHERNET] = 'Ethernet connection';
+              states[Connection.WIFI]     = 'WiFi connection';
+              states[Connection.CELL_2G]  = 'Cell 2G connection';
+              states[Connection.CELL_3G]  = 'Cell 3G connection';
+              states[Connection.CELL_4G]  = 'Cell 4G connection';
+              states[Connection.NONE]     = 'No network connection';
+          
+             //    alert('Connection type: ' + states[networkState]);
+          }
+          
+          
+          function onOnline() {
+              window.location.replace("index.html");
+          }
+          
+        </script>
+    </head> 
+    <body class="corpo">
+     <div class="header">
+        <h1 class="bar"></h1>
+            <div id="homebutton">
+        <a  href="javascript:history.back()">
+             <img src="img/icona.png" alt="Confcommercio Verona" style="vertical-align:middle;"/>
+        </a>  
+  
+        </div>
+      </div> 
+      <div class="footer">
+        <h1 class="bar">&copy; <script>document.write(new Date().getFullYear())</script> Confcommercio Verona </h1>
+      </div>  
+      <div id="spacerhome">
+        </div> 
+        <div id="logo-wrap">
+          <img src="img/logo_big.png" alt="Confcommercio Verona" />
+        </div>
+   
+        <p align="center"><br>Questa applicazione ha bisogno di essere collegata ad internet per funzionare. <br> Controlla le tue impostazioni.</p> 
+      <div class="app"> 
+            <div id="deviceready" class="blink">
+                <p class="event listening"> </p>
+                <p class="event received"> </p>
+            </div>
+       </div>     
+    
+      <p id="debug">
+    </p> 
+
+  </body>
+</html>

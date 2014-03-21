@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <link type="text/css" rel="stylesheet" href="css/custom.css">
+        <title>Confcommercio Verona</title>
+        <script type="text/javascript" src="phonegap.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/OptionsMenu.js"/>
+
+        
+        <script type="text/javascript" src="PushNotification.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+         <script type="text/javascript">
+                    app.initialize();
+                  
+        </script>
+    </head> 
+    <body class="corpo">
+     <div class="header">
+        <h1 class="bar"></h1>
+            <div id="homebutton">
+        <a  href="javascript:history.back()">
+             <img src="img/icona.png" alt="Confcommercio Verona" style="vertical-align:middle;"/>
+        </a>  
+  
+        </div>
+         <!--<div id="settingsbutton">
+           <a  href="javascript:history.back()">&nbsp; 
+         <img src="img/settings.png" alt="Impostazioni" style="vertical-align:middle;"/>
+         </a>    
+        </div>-->
+      </div> 
+      <div class="footer">
+        <h1 class="bar">&copy; <script>document.write(new Date().getFullYear())</script> Confcommercio Verona </h1>
+      </div>  
+      <div id="spacerhome">
+        </div> 
+        <div id="logo-wrap">
+          <img src="img/logo_big.png" alt="Confcommercio Verona" />
+        </div>
+        <div id="menu">
+        <ul>
+        
+          <li>
+          <a href="rassegna-stampa.html">Rassegna Stampa</a>
+          </li>
+          
+          <li>
+          <a href="video.html">Video</a>
+          </li> 
+          <li>
+          <a href="news-dal-sito.html">News dal sito</a>
+          </li>
+          <li>
+          <a href="corsi.html">Corsi di formazione</a>
+          </li>
+          <li>
+          <a href="il-commercio-veronese.html">Il Commercio Veronese</a>
+          </li>
+          <li>
+          <a href="prime-pagine.html">Prime Pagine Quotidiani</a>
+          </li>
+         
+        </ul>
+        <div>
+      </div>       
+      <div class="app"> 
+            <div id="deviceready" class="blink">
+                <p class="event listening"> </p>
+                <p class="event received"> </p>
+            </div>
+       </div>     
+    </div>
+      <p id="definitions">  gfgf
+    </p> 
+    <script>
+
+
+       
+
+
+ document.addEventListener('deviceready', function () {
+ alert("dssdsd");
+       var element = document.getElementById('definitions');
+        element.innerHTML = 'Device Name: '     + device.name     + '<br />' +
+                            'Device Cordova: '  + device.cordova  + '<br />' +
+                            'Device Platform: ' + device.platform + '<br />' +
+                            'Device UUID: '     + device.uuid     + '<br />' +
+                            'Device Model: '    + device.model    + '<br />' +
+                            'Device Version: '  + device.version  + '<br />';   
+                                
+  
+          
+            window.setTimeout("closeDefinitions();", 5000);
+
+            function closeDefinitions(){
+                  document.getElementById("definitions").style.display="none";}
+    
+
+}, false);
+</script>
+  </body>
+</html>
