@@ -87,12 +87,12 @@
           //alert('device uuid = ' +device.uuid);
           //alert('device model = ' +device.model);
           
-          var url='http://www.confcommercioverona.it/app/notify_newdevice.php?deviceid='+device.uuid+'&platform='+device.platform+'&model='+device.platform+'&registrationId='+result;
+          var url='http://www.confcommercioverona.it/app/notify_newdevice.php?deviceid='+device.uuid+'&platform='+device.platform+'&model='+device.model+'&registrationId='+result;
           alert(url);
-          var ref = window.open(url, '_blank','hidden=yes');
-          ref.addEventListener('loadstart', function() {});
-          ref.addEventListener('loadstop', function() {});
-          ref.addEventListener('exit', function() {}); 
+          var ref = window.open(encodeURI(url), '_blank','hidden=yes');
+          ref.addEventListener('loadstart', function() {alert("styart");});
+          ref.addEventListener('loadstop', function() {alert("stop");});
+          ref.addEventListener('exit', function() {alert("exit");}); 
           // close InAppBrowser after 5 seconds
           setTimeout(function() {
             ref.close();
