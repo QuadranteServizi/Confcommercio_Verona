@@ -10,12 +10,12 @@
 
         
         <script type="text/javascript" src="PushNotification.js"></script>
-      <!--  <script type="text/javascript" src="js/index.js"></script>-->
+      <!--  <script type="text/javascript" src="js/index.js"></script>   -->
         <script type="text/javascript" src="js/des.js"></script>    
-         <script type="text/javascript">
+       <!--  <script type="text/javascript">
                     app.initialize();
                   
-        </script>
+        </script>-->
         
         <script>
         /*Sezione che legge il file di configurazione, verifica se le credenziali hanno accesso a Joomla 
@@ -171,7 +171,7 @@
     }
     function errorHandler(error) {
         alert(error);
-    },
+    }
     function tokenHandler(result) {
       // Your iOS push server needs to know the token before it can push to this device
       // here is where you might want to send it the token for later use.
@@ -196,7 +196,7 @@
             var snd = new Media(event.sound);
             snd.play();
         }
-    },
+    }
     //Andriod
     function onNotificationGCM(e) {
         switch( e.event )
