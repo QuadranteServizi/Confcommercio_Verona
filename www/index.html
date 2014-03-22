@@ -27,13 +27,16 @@
                             gotFileEntry, null);
             alert("gotFS2");
          }
+
                      
         function gotFileEntry(fileEntry) {
             alert("gotFileEntry");
             var fail = null;
             file.entry = fileEntry;
+            fileEntry.createWriter(gotFileWriter, null);
             readText();
         }
+
 
         function readText() {
             alert("readText");
