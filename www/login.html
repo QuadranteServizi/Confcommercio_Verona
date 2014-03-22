@@ -94,20 +94,26 @@
 
 
     function saveText(e) {
-      alert($('ricevinotifiche').value);
+      alert(document.getElementById('ricevinotifiche'));
       document.getElementById("definitions").style.display="block";
       $('definitions').innerHTML = "Salvataggio in corso...";
       
       var username = $('username').value,
           password = $('password').value,
-          ricevinotifiche = $('ricevinotifiche').value,
+          ricevinotifiche = document.getElementById('ricevinotifiche'),
           fail;
-      
+       /*
        if (typeof ricevinotifiche === 'undefined'){
               ricevinotifiche='off';
             }
        if(ricevinotifiche==''){ricevinotifiche='off';}
-  
+                                                     */
+      if (ricevinotifiche.checked){
+              ricevinotifiche='on';
+      }else{
+             ricevinotifiche='off';
+      }
+                                             
       alert(ricevinotifiche);
       dbEntries.push(username + '***' + password + '***'+ ricevinotifiche);
 
