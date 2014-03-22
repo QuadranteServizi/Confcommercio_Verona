@@ -12,7 +12,7 @@
 <script type="text/javascript" charset="utf-8" src="js/OptionsMenu.js"/></script>
     <script type="text/javascript" src="js/des.js"></script>                        
   </head>      
-  <body class="corpo">         
+  <body class="corpo" onload="onLoad()">         
     <div class="header">        
       <h1 class="bar">Confcommercio Verona</h1>            
       <div id="homebutton">        
@@ -57,12 +57,22 @@
     <script src="phonegap.js"></script>
     <script type="text/javascript" charset="utf-8">
 
-          document.addEventListener("deviceready", checkLogin, false);
+          //document.addEventListener("deviceready", checkLogin, false);
           document.addEventListener("offline", onOffline, false);
           document.addEventListener("online", onOnline, false);
           
-          function checkLogin() {
+          function onLoad() {
                             
+              /*Preso da http://blog.safaribooksonline.com/2012/02/29/phonegap-storing-and-retrieving-with-the-filesystem/ */
+              var FILENAME = 'confcommercio_config.db',
+              $ = function (id) {
+                  return document.getElementById(id);
+              },
+              file = {
+                  writer: { available: false },
+                  reader: { available: false }
+              },
+              dbEntries = [];
               //guardo il file
               var fail = failCB('requestFileSystem');
               window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
@@ -81,19 +91,10 @@
 <script>
 
 
-/*Preso da http://blog.safaribooksonline.com/2012/02/29/phonegap-storing-and-retrieving-with-the-filesystem/ */
-    var FILENAME = 'confcommercio_config.db',
-        $ = function (id) {
-            return document.getElementById(id);
-        },
-        file = {
-            writer: { available: false },
-            reader: { available: false }
-        },
-        dbEntries = [];
+
 
     function saveText(e) {
-    
+      alert($('ricevinotifiche').value);
       document.getElementById("definitions").style.display="block";
       $('definitions').innerHTML = "Salvataggio in corso...";
       
@@ -120,7 +121,7 @@
             file.writer.object.write(username + '***' + password + '***'+ ricevinotifiche); 
             
            
-            
+              alert(username + '***' + password + '***'+ ricevinotifiche);
             
             
               //Aggiorno lo stato delle notifiche sul db
