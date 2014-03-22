@@ -113,3 +113,31 @@ function receivedEvent(id) {
         
              
    //--------------------------------------------------------------------------          
+          try{ 
+
+                  alert("notifiche"); 
+                  var pushNotification = window.plugins.pushNotification;
+                  if ( device.platform == 'android' || device.platform == 'Android' ){
+                        pushNotification.register(
+                            successHandler,
+                            errorHandler, {
+                                "senderID":"1073127551296",
+                                "ecb":"onNotificationGCM"
+                            });
+                    }else{
+                    alert("notifiche2"); 
+                      pushNotification.register(
+                             tokenHandler, 
+                             errorHandler, {
+                             "badge":"true",
+                             "sound":"true",
+                             "alert":"true",
+                             "ecb":"onNotificationAPN"
+                            });	// required!
+                    }
+              }
+        			catch(err){ 
+        					txt="There was an error on this page.\n\n"; 
+        					txt+="Error description: " + err.message + "\n\n"; 
+        					alert(txt); 
+        			}
