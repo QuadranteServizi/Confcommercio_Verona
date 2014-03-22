@@ -33,11 +33,9 @@
           };
             
          function gotFS(fs) {
-            alert("gotFS");
             var fail =null;
             fs.root.getFile('confcommercio_config.db', {create: true, exclusive: false},
                             gotFileEntry, null);
-            alert("gotFS2");
          }
          
          function gotFileWriter(fileWriter) {
@@ -47,7 +45,6 @@
 
                      
         function gotFileEntry(fileEntry) {
-            alert("gotFileEntry");
             var fail = failCB('createWriter');
             file.entry = fileEntry;
              alert("gotFileEntry");
@@ -58,7 +55,6 @@
 
 
         function readText() {
-            alert("readText");
             if (file.entry) {
                 file.entry.file(function (dbFile) {
                     
@@ -102,6 +98,7 @@
                       http.open('HEAD', url, false);
                       http.send();
                       if (http.status==404){
+                        alert("Credenziali salvate non sono corrette!");
                         window.location.replace("login.html");
                       }   
                     }

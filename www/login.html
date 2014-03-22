@@ -56,15 +56,7 @@
     </div>
     <script src="phonegap.js"></script>
     <script type="text/javascript" charset="utf-8">
-
-          //document.addEventListener("deviceready", checkLogin, false);
-          document.addEventListener("offline", onOffline, false);
-          document.addEventListener("online", onOnline, false);
-          
-          function onLoad() {
-                            
-              /*Preso da http://blog.safaribooksonline.com/2012/02/29/phonegap-storing-and-retrieving-with-the-filesystem/ */
-              var FILENAME = 'confcommercio_config.db',
+             var FILENAME = 'confcommercio_config.db',
               $ = function (id) {
                   return document.getElementById(id);
               },
@@ -73,6 +65,14 @@
                   reader: { available: false }
               },
               dbEntries = [];
+          //document.addEventListener("deviceready", checkLogin, false);
+          document.addEventListener("offline", onOffline, false);
+          document.addEventListener("online", onOnline, false);
+          
+          function onLoad() {
+                            
+              /*Preso da http://blog.safaribooksonline.com/2012/02/29/phonegap-storing-and-retrieving-with-the-filesystem/ */
+             
               //guardo il file
               var fail = failCB('requestFileSystem');
               window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
