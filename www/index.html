@@ -128,6 +128,16 @@
             console.log("event " + event);
             if (event.alert) {
                 navigator.notification.alert(event.alert);
+                var str = event.alert;
+                var res = str.split("***");
+    
+                var x="";
+                var r=confirm(res[0]);
+                if (r==true){
+                    var notify_news_id=res[1]; //  id del contenuto joomla da notificare
+                    //qui per aprire la notifica in app
+                    window.open("apri.html?notify_id="+notify_news_id,"_self","location=yes");
+                }
             }
             if (event.badge) {
                 console.log("Set badge on  " + pushNotification);
