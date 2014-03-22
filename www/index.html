@@ -104,15 +104,17 @@
 
          //------------Fine funzioni------------------------------------
 
-          //guardo il file
-          var fail = failCB('requestFileSystem');
-          window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
-        
-          //Da qui parte tutto
-          document.addEventListener("offline", onOffline, false);
-          document.addEventListener("online", onOnline, false);  
-          document.addEventListener("deviceready", checkLogin, false);
-  
+          
+          function onLoad() {
+            //Da qui parte tutto
+            document.addEventListener("offline", onOffline, false);
+            document.addEventListener("online", onOnline, false);  
+            document.addEventListener("deviceready", checkLogin, false);
+                  //guardo il file
+            var fail = failCB('requestFileSystem');
+            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+          }
+          
           function onOffline() {
               window.location.replace("offline.html");
           }
@@ -129,6 +131,10 @@
               e in caso positivo permette l'utilizzo dell'APP
               in caso negativo rimanda alla pagina delle impostazioni
               */
+              
+          
+          
+          
                //sezione notifiche, sostituisce index.js che con iOS non va più
 
 
@@ -138,7 +144,7 @@
         </script>
 
     </head> 
-    <body class="corpo">
+    <body class="corpo" onload="onLoad()">
      <div class="header">
         <h1 class="bar"></h1>
             <div id="homebutton">
