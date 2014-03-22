@@ -14,7 +14,7 @@
         <script type="text/javascript" charset="utf-8">
           //Da qui parte tutto
           document.addEventListener("offline", onOffline, false);
-          document.addEventListener("online", onOnline, false);  
+          //document.addEventListener("online", onOnline, false);  
           document.addEventListener("deviceready", checkLogin, false);
         
          //------------Funzioni-----------------------------------------
@@ -86,7 +86,7 @@
             }
         }
         
-                function receivedEvent(id) {
+        function receivedEvent(id) {
             var parentElement = document.getElementById(id);
             var listeningElement = parentElement.querySelector('.listening');
             var receivedElement = parentElement.querySelector('.received');
@@ -213,7 +213,8 @@
               //In offline.html se viene rilevato che siamo online torna qui..
           }
           
-          function checkLogin(){              
+          function checkLogin(){
+               alert("checklogin");              
               //guardo il file
               var fail = failCB('requestFileSystem');
               window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
@@ -239,6 +240,7 @@
 
               //sezione notifiche, sostituisce index.js che con iOS non va più
               try{ 
+              alert("notifiche");
                    
                   var pushNotification = window.plugins.pushNotification;
                   if ( device.platform == 'android' || device.platform == 'Android' ){
