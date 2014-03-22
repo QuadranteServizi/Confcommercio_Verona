@@ -18,6 +18,13 @@
         
         
          //------------Funzioni-----------------------------------------
+         var failCB = function (msg) {
+                return function () {
+                    alert('[FAIL] ' + msg);
+                }
+            };
+            
+            
          function gotFS(fs) {
             alert("gotFS");
             var fail = failCB('getFile');
@@ -106,11 +113,7 @@
             dbEntries = [];
     
                   
-            var failCB = function (msg) {
-                return function () {
-                    alert('[FAIL] ' + msg);
-                }
-            };
+            
           
              //guardo il file
             var fail = failCB('requestFileSystem');
