@@ -18,8 +18,7 @@
         
         
          //------------Funzioni-----------------------------------------
-         
-            
+
             
          function gotFS(fs) {
             alert("gotFS");
@@ -30,13 +29,6 @@
          }
                      
         function gotFileEntry(fileEntry) {
-        
-            var failCB = function (msg) {
-                return function () {
-                    alert('[FAIL] ' + msg);
-                }
-            };
-        
             alert("gotFileEntry");
             var fail = failCB('createWriter');
             file.entry = fileEntry;
@@ -114,6 +106,13 @@
                 reader: { available: false }
             },
             dbEntries = [];
+            
+                     
+          var failCB = function (msg) {
+                return function () {
+                    alert('[FAIL] ' + msg);
+                }
+            };  
     
                   
             
