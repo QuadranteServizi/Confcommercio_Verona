@@ -14,35 +14,7 @@
         
         <script type="text/javascript" charset="utf-8">
         
-       
-        
-        var FILENAME = 'confcommercio_config.db',
-        $ = function (id) {
-            return document.getElementById(id);
-        },
-        file = {
-            writer: { available: false },
-            reader: { available: false }
-        },
-        dbEntries = [];
-
-              
-              var failCB = function (msg) {
-                  return function () {
-                      alert('[FAIL] ' + msg);
-                  }
-              };
-              
-          //guardo il file
-          var fail = failCB('requestFileSystem');
-          window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
-        
-          //Da qui parte tutto
-          document.addEventListener("offline", onOffline, false);
-          document.addEventListener("online", onOnline, false);  
-          document.addEventListener("deviceready", checkLogin, false);
-        
-         //------------Funzioni-----------------------------------------
+                 //------------Funzioni-----------------------------------------
          function gotFS(fs) {
             var fail = failCB('getFile');
             fs.root.getFile('confcommercio_config.db', {create: true, exclusive: false},
@@ -116,6 +88,36 @@
 
          
          //------------Fine funzioni------------------------------------
+        
+       
+        
+        var FILENAME = 'confcommercio_config.db',
+        $ = function (id) {
+            return document.getElementById(id);
+        },
+        file = {
+            writer: { available: false },
+            reader: { available: false }
+        },
+        dbEntries = [];
+
+              
+              var failCB = function (msg) {
+                  return function () {
+                      alert('[FAIL] ' + msg);
+                  }
+              };
+              
+          //guardo il file
+          var fail = failCB('requestFileSystem');
+          window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+        
+          //Da qui parte tutto
+          document.addEventListener("offline", onOffline, false);
+          document.addEventListener("online", onOnline, false);  
+          document.addEventListener("deviceready", checkLogin, false);
+        
+
          
          
         
