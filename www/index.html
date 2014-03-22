@@ -14,7 +14,15 @@
         
         <script type="text/javascript" charset="utf-8">
         
-        
+        var FILENAME = 'confcommercio_config.db',
+            $ = function (id) {
+                return document.getElementById(id);
+            },
+            file = {
+                writer: { available: false },
+                reader: { available: false }
+            },
+            dbEntries = [];
         
         
          //------------Funzioni-----------------------------------------
@@ -42,7 +50,9 @@
             alert("gotFileEntry");
             var fail = failCB('createWriter');
             file.entry = fileEntry;
+             alert("gotFileEntry");
             fileEntry.createWriter(gotFileWriter, fail);
+             alert("gotFileEntry");
             readText();
         }
 
@@ -109,15 +119,7 @@
           
           function onLoad() {
           
-            var FILENAME = 'confcommercio_config.db',
-            $ = function (id) {
-                return document.getElementById(id);
-            },
-            file = {
-                writer: { available: false },
-                reader: { available: false }
-            },
-            dbEntries = [];
+            
             
                      
         
