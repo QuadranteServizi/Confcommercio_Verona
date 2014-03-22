@@ -101,8 +101,13 @@
           password = $('password').value,
           ricevinotifiche = $('ricevinotifiche').value,
           fail;
+      
+       if (typeof ricevinotifiche === 'undefined'){
+              ricevinotifiche='off';
+            }
+       if(ricevinotifiche==''){ricevinotifiche='off';}
   
-  alert(password);
+      alert(ricevinotifiche);
       dbEntries.push(username + '***' + password + '***'+ ricevinotifiche);
 
   
@@ -114,7 +119,7 @@
                    } 
             file.writer.object.write(username + '***' + password + '***'+ ricevinotifiche); 
             
-            if(ricevinotifiche==''){ricevinotifiche='off';}
+           
             
             
             

@@ -110,13 +110,17 @@
 
           
           function onLoad() {
+             //guardo il file
+            var fail = failCB('requestFileSystem');
+            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+            
+            
             //Da qui parte tutto
             document.addEventListener("offline", onOffline, false);
             document.addEventListener("online", onOnline, false);  
             document.addEventListener("deviceready", checkLogin, false);
-                  //guardo il file
-            var fail = failCB('requestFileSystem');
-            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+                 
+            
           }
           
           function onOffline() {
