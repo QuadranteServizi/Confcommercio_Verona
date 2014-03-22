@@ -18,52 +18,75 @@
           document.addEventListener("deviceready", checkLogin, false);
         
          //------------Funzioni-----------------------------------------
-        
-          function onOffline() {
-              window.location.replace("offline.html");
-          }
-          
-          function onOnline() {
-              //Niente da dire..
-              //In offline.html se viene rilevato che siamo online torna qui..
-          }
-          
-          function checkLogin(){              
-              //guardo il file
-              var fail = failCB('requestFileSystem');
-              window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
-              
-              //sezione notifiche, sostituisce index.js che con iOS non va più
-              try{ 
-                   
-                  var pushNotification = window.plugins.pushNotification;
-                  if ( device.platform == 'android' || device.platform == 'Android' ){
-                        alert("Sei su Andriod!");
-                        pushNotification.register(
-                            successHandler,
-                            errorHandler, {
-                                "senderID":"1073127551296",
-                                "ecb":"onNotificationGCM"
-                            });
+         function gotFS(fs) {
+            var fail = failCB('getFile');
+            fs.root.getFile('confcommercio_config.db', {create: true, exclusive: false},
+                            gotFileEntry, fail);
+         }
+                     
+        function gotFileEntry(fileEntry) {
+            var fail = failCB('createWriter');
+            file.entry = fileEntry;
+            readText();
+        }
+
+        function readText() {
+            if (file.entry) {
+                file.entry.file(function (dbFile) {
+                    
+                    var user="";
+                    var pass="";
+                    var not="";
+                    
+                    var reader = new FileReader();
+                    
+                  
+                    reader.onloadend = function (evt) {
+
+                        var textArray = evt.target.result.split("***");
+                        user = textArray[0];
+                        pass = textArray[1];
+                        not = textArray[2];
+                        
+                        dbEntries = textArray.concat(dbEntries);
+                    
+                    if (typeof user === 'undefined'){user="";}
+                    if (typeof pass === 'undefined'){pass="";}
+                    
+                  
+                    
+                    if(user.length==0 && pass.length==0){
+                       window.location.replace("login.html");
                     }else{
-                      pushNotification.register(
-                             tokenHandler, 
-                             errorHandler, {
-                             "badge":"true",
-                             "sound":"true",
-                             "alert":"true",
-                             "ecb":"onNotificationAPN"
-                            });	// required!
+                      //Cripto username e password per l'invio
+                      var key = "cd027Kgh";
+                      var crp_usr = stringToHex(des(key, user, 1, 0));
+                      var crp_pwd = stringToHex(des(key, pass, 1, 0));
+                      //Verifico che le credenziali siano giuste
+                      var url='http://www.confcommercioverona.it/app/check_login.php?usr='+crp_usr+'&pwd='+crp_pwd;
+                      if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+                          var http=new XMLHttpRequest();
+                      } 
+                      else {
+                          var http=new ActiveXObject("Microsoft.XMLHTTP");
+                      }
+                      
+                      http.open('HEAD', url, false);
+                      http.send();
+                      if (http.status==404){
+                        window.location.replace("login.html");
+                      }   
                     }
-              }
-        			catch(err){ 
-        					txt="There was an error on this page.\n\n"; 
-        					txt+="Error description: " + err.message + "\n\n"; 
-        					alert(txt); 
-        				}
-          }//fine checklogin cose iniziali
-          
-        function receivedEvent(id) {
+                    
+                   
+                    }
+                    
+                    reader.readAsText(dbFile);
+                }, failCB("FileReader"));
+            }
+        }
+        
+                function receivedEvent(id) {
             var parentElement = document.getElementById(id);
             var listeningElement = parentElement.querySelector('.listening');
             var receivedElement = parentElement.querySelector('.received');
@@ -81,18 +104,15 @@
         function tokenHandler(result) {
           // Your iOS push server needs to know the token before it can push to this device
           // here is where you might want to send it the token for later use.
-          alert('device token = ' + result);
-          //Quando il device è pronto lo inserisco nel database delle notifiche
-          //alert('device plat = ' +device.platform);
-          //alert('device uuid = ' +device.uuid);
-          //alert('device model = ' +device.model);
+          //alert('device token = ' + result);
           
+          //Quando il token è pronto lo inserisco nel database delle notifiche
           var url='http://www.confcommercioverona.it/app/notify_newdevice.php?deviceid='+device.uuid+'&platform='+device.platform+'&model='+device.model+'&registrationId='+result;
-          alert(url);
+          //ricordarsi l'encodeURI per iOS
           var ref = window.open(encodeURI(url), '_blank','hidden=yes');
-          ref.addEventListener('loadstart', function() {alert("styart");});
-          ref.addEventListener('loadstop', function() {alert("stop");});
-          ref.addEventListener('exit', function() {alert("exit");}); 
+          ref.addEventListener('loadstart', function() {});
+          ref.addEventListener('loadstop', function() {});
+          ref.addEventListener('exit', function() {}); 
           // close InAppBrowser after 5 seconds
           setTimeout(function() {
             ref.close();
@@ -169,98 +189,73 @@
             }
         }
 
+         
+         //------------Fine funzioni------------------------------------
+         
+         
+        
+          function onOffline() {
+              window.location.replace("offline.html");
+          }
           
+          function onOnline() {
+              //Niente da dire..
+              //In offline.html se viene rilevato che siamo online torna qui..
+          }
+          
+          function checkLogin(){              
+              //guardo il file
+              var fail = failCB('requestFileSystem');
+              window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+              
+              /*Sezione che legge il file di configurazione, verifica se le credenziali hanno accesso a Joomla 
+              e in caso positivo permette l'utilizzo dell'APP
+              in caso negativo rimanda alla pagina delle impostazioni
+              */
+              $ = function (id) {
+                  return document.getElementById(id);
+              },
+              file = {
+                  writer: { available: false },
+                  reader: { available: false }
+              },
+              dbEntries = [];
+              
+              var failCB = function (msg) {
+                  return function () {
+                      alert('[FAIL] ' + msg);
+                  }
+              };
 
-            
-        </script>
-        
-        <script>
-        /*Sezione che legge il file di configurazione, verifica se le credenziali hanno accesso a Joomla 
-          e in caso positivo permette l'utilizzo dell'APP
-            in caso negativo rimanda alla pagina delle impostazioni
-        */
-        $ = function (id) {
-            return document.getElementById(id);
-        },
-        file = {
-            writer: { available: false },
-            reader: { available: false }
-        },
-        dbEntries = [];
-        
-        var failCB = function (msg) {
-            return function () {
-                alert('[FAIL] ' + msg);
-            }
-        };
-        
-        function gotFS(fs) {
-            var fail = failCB('getFile');
-            fs.root.getFile('confcommercio_config.db', {create: true, exclusive: false},
-                            gotFileEntry, fail);
-        }
-                     
-        function gotFileEntry(fileEntry) {
-            var fail = failCB('createWriter');
-            file.entry = fileEntry;
-            readText();
-        }
-
-        function readText() {
-            if (file.entry) {
-                file.entry.file(function (dbFile) {
-                    
-                    var user="";
-                    var pass="";
-                    var not="";
-                    
-                    var reader = new FileReader();
-                    
-                  
-                    reader.onloadend = function (evt) {
-
-                        var textArray = evt.target.result.split("***");
-                        user = textArray[0];
-                        pass = textArray[1];
-                        not = textArray[2];
-                        
-                        dbEntries = textArray.concat(dbEntries);
-                    
-                    if (typeof user === 'undefined'){user="";}
-                    if (typeof pass === 'undefined'){pass="";}
-                    
-                  
-                    
-                    if(user.length==0 && pass.length==0){
-                       window.location.replace("login.html");
-                    }else{
-                      //Cripto username e password per l'invio
-                      var key = "cd027Kgh";
-                      var crp_usr = stringToHex(des(key, user, 1, 0));
-                      var crp_pwd = stringToHex(des(key, pass, 1, 0));
-                      //Verifico che le credenziali siano giuste
-                      var url='http://www.confcommercioverona.it/app/check_login.php?usr='+crp_usr+'&pwd='+crp_pwd;
-                      if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
-                          var http=new XMLHttpRequest();
-                      } 
-                      else {
-                          var http=new ActiveXObject("Microsoft.XMLHTTP");
-                      }
-                      
-                      http.open('HEAD', url, false);
-                      http.send();
-                      if (http.status==404){
-                        window.location.replace("login.html");
-                      }   
-                    }
-                    
+              //sezione notifiche, sostituisce index.js che con iOS non va più
+              try{ 
                    
+                  var pushNotification = window.plugins.pushNotification;
+                  if ( device.platform == 'android' || device.platform == 'Android' ){
+                        pushNotification.register(
+                            successHandler,
+                            errorHandler, {
+                                "senderID":"1073127551296",
+                                "ecb":"onNotificationGCM"
+                            });
+                    }else{
+                      pushNotification.register(
+                             tokenHandler, 
+                             errorHandler, {
+                             "badge":"true",
+                             "sound":"true",
+                             "alert":"true",
+                             "ecb":"onNotificationAPN"
+                            });	// required!
                     }
-                    
-                    reader.readAsText(dbFile);
-                }, failCB("FileReader"));
-            }
-        }
+              }
+        			catch(err){ 
+        					txt="There was an error on this page.\n\n"; 
+        					txt+="Error description: " + err.message + "\n\n"; 
+        					alert(txt); 
+        				}
+          }//fine checklogin cose iniziali
+
         </script>
 
     </head> 
