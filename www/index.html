@@ -22,15 +22,15 @@
             
          function gotFS(fs) {
             alert("gotFS");
-            var fail = failCB('getFile');
+            var fail =null;
             fs.root.getFile('confcommercio_config.db', {create: true, exclusive: false},
-                            gotFileEntry, fail);
+                            gotFileEntry, null);
             alert("gotFS2");
          }
                      
         function gotFileEntry(fileEntry) {
             alert("gotFileEntry");
-            var fail = failCB('createWriter');
+            var fail = null;
             file.entry = fileEntry;
             readText();
         }
@@ -88,7 +88,7 @@
                     }
                     
                     reader.readAsText(dbFile);
-                }, failCB("FileReader"));
+                }, null);
             }
         }
 
@@ -108,17 +108,13 @@
             dbEntries = [];
             
                      
-          var failCB = function (msg) {
-                return function () {
-                    alert('[FAIL] ' + msg);
-                }
-            };  
+        
     
                   
             
           
              //guardo il file
-            var fail = failCB('requestFileSystem');
+            var fail =null;
             window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
             
             
