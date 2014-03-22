@@ -113,9 +113,10 @@ function receivedEvent(id) {
         
              
    //--------------------------------------------------------------------------          
+         
+   function inizializzanotifiche() {      
           try{ 
 
-                  alert("notifiche"); 
                   var pushNotification = window.plugins.pushNotification;
                   if ( device.platform == 'android' || device.platform == 'Android' ){
                         pushNotification.register(
@@ -125,7 +126,6 @@ function receivedEvent(id) {
                                 "ecb":"onNotificationGCM"
                             });
                     }else{
-                    alert("notifiche2"); 
                       pushNotification.register(
                              tokenHandler, 
                              errorHandler, {
@@ -141,3 +141,5 @@ function receivedEvent(id) {
         					txt+="Error description: " + err.message + "\n\n"; 
         					alert(txt); 
         			}
+              
+   }
