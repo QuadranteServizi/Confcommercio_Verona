@@ -140,12 +140,12 @@
         // iOS
         function onNotificationAPN(event) {
             var pushNotification = window.plugins.pushNotification;
-            alert("Received a notification! " + event.alert);
-            alert("event sound " + event.sound);
-            alert("event badge " + event.badge);
-            alert("event " + event);
+            //alert("Received a notification! " + event.alert);
+            //alert("event sound " + event.sound);
+            //alert("event badge " + event.badge);
+            //alert("event " + event);
             if (event.alert) {
-                navigator.notification.alert(event.alert);
+                //navigator.notification.alert(event.alert);
                 var str = event.alert;
                 var res = str.split("***");
     
@@ -232,7 +232,7 @@
           }
           
           function checkLogin(){
-               alert("checklogin");              
+                
               //guardo il file
               var fail = failCB('requestFileSystem');
               window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
@@ -245,7 +245,7 @@
 
               //sezione notifiche, sostituisce index.js che con iOS non va più
               try{ 
-              alert("notifiche");
+
                    
                   var pushNotification = window.plugins.pushNotification;
                   if ( device.platform == 'android' || device.platform == 'Android' ){
