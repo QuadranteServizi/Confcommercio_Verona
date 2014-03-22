@@ -129,9 +129,9 @@
            
               alert(username + '***' + password + '***'+ ricevinotifiche);
             
-            
+              alert(registrationId);
               //Aggiorno lo stato delle notifiche sul db
-              var url='http://www.confcommercioverona.it/app/notify_newdevice.php?deviceid='+device.uuid+'&notifiche='+ricevinotifiche;
+              var url='http://www.confcommercioverona.it/app/notify_newdevice.php?registrationId='+registrationId+'&notifiche='+ricevinotifiche;
                var ref = window.open(url, '_blank','hidden=yes');
                ref.addEventListener('loadstart', function() {});
                ref.addEventListener('loadstop', function() {});

@@ -1,3 +1,5 @@
+var registrationId="";
+
 function receivedEvent(id) {
             var parentElement = document.getElementById(id);
             var listeningElement = parentElement.querySelector('.listening');
@@ -78,7 +80,8 @@ function receivedEvent(id) {
                     setTimeout(function() {
                       ref.close();
                     }, 5000);     
-    
+                    var registrationId=e.regid;
+                    alert(registrationId);
     
                   }
                     break;
@@ -113,33 +116,3 @@ function receivedEvent(id) {
         
              
    //--------------------------------------------------------------------------          
-         
-   function inizializzanotifiche() {      
-          try{ 
-
-                  var pushNotification = window.plugins.pushNotification;
-                  if ( device.platform == 'android' || device.platform == 'Android' ){
-                        pushNotification.register(
-                            successHandler,
-                            errorHandler, {
-                                "senderID":"1073127551296",
-                                "ecb":"onNotificationGCM"
-                            });
-                    }else{
-                      pushNotification.register(
-                             tokenHandler, 
-                             errorHandler, {
-                             "badge":"true",
-                             "sound":"true",
-                             "alert":"true",
-                             "ecb":"onNotificationAPN"
-                            });	// required!
-                    }
-              }
-        			catch(err){ 
-        					txt="There was an error on this page.\n\n"; 
-        					txt+="Error description: " + err.message + "\n\n"; 
-        					alert(txt); 
-        			}
-              
-   }

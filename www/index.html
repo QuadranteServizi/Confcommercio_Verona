@@ -113,12 +113,11 @@
 
           
           function onLoad() {
-            alert("onload");
              //guardo il file
             var fail =null;
             window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
             
-            
+            readText();
             //Da qui parte tutto
             document.addEventListener("offline", onOffline, false);
             document.addEventListener("online", onOnline, false);  
