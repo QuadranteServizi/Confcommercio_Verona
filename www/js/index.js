@@ -38,7 +38,7 @@ function handleLogin() {
       }else{
           window.localStorage["username"] = u;
           window.localStorage["password"] = p;
-          window.location.replace("index.html"); 
+          window.location.replace("news-dal-sito.html"); 
       }           
     } else {
         navigator.notification.alert("Devi inserire username e password!", function() {});

@@ -1,225 +1,52 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, user-scalable=no">
-        <link type="text/css" rel="stylesheet" href="css/custom.css">
-        <title>Confcommercio Verona</title>
-        <script type="text/javascript" src="phonegap.js"></script>
-        <script type="text/javascript" charset="utf-8" src="js/OptionsMenu.js"/> </script>
-        <script type="text/javascript" charset="utf-8" src="js/notifiche.js"/></script>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">	
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title>Auth Demo 2</title>
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/latest/jquery.mobile.min.css" />
+	<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+	<script src="jquery.mobile/jquery-1.7.2.min.js"></script>
+	<script src="jquery.mobile/jquery.mobile-1.1.0.min.js"></script>
+	<script src="js/index.js"></script>
+</head>
 
-        <script type="text/javascript" src="PushNotification.js"></script>
-        <script type="text/javascript" src="js/des.js"></script> 
-        
-        <script type="text/javascript" charset="utf-8">
-        
-        var FILENAME = 'confcommercio_config.db',
-            $ = function (id) {
-                return document.getElementById(id);
-            },
-            file = {
-                writer: { available: false },
-                reader: { available: false }
-            },
-            dbEntries = [];
-        
-        
-         //------------Funzioni-----------------------------------------
-         var failCB = function (msg) {
-              return function () {
-                  alert('[FAIL] ' + msg);
-              }
-          };
-            
-         function gotFS(fs) {
-            var fail =null;
-            fs.root.getFile('confcommercio_config.db', {create: true, exclusive: false},
-                            gotFileEntry, null);
-         }
-         
-         function gotFileWriter(fileWriter) {
-              file.writer.available = true;
-              file.writer.object = fileWriter;
-          }
+<body onload="init()">
 
-                     
-        function gotFileEntry(fileEntry) {
-            var fail = failCB('createWriter');
-            file.entry = fileEntry;
-            fileEntry.createWriter(gotFileWriter, fail);
-            readText();
-        }
+<div id="launcherPage" data-role="page">
+  <p align="center">Caricamento in corso...</p>
+	<!-- I'm just here waiting for deviceReady -->
+</div>
 
+<div id="loginPage" data-role="page">
 
-        function readText() {
-            if (file.entry) {
-                file.entry.file(function (dbFile) {
-                    
-                    var user="";
-                    var pass="";
-                    var not="";
-                    
-                    var reader = new FileReader();
-
-                    reader.onloadend = function (evt) {
-                    
-                    var textArray = evt.target.result.split("***");
-                        user = textArray[0];
-                        pass = textArray[1];
-                        not = textArray[2];
-                        
-                    dbEntries = textArray.concat(dbEntries);
-                    
-                    
-                    if (typeof user === 'undefined'){user="";}
-                    if (typeof pass === 'undefined'){pass="";}
-                    //alert("user: "+ user);
-                    if(user.length==0 && pass.length==0){
-                       window.location = "login.html";
-                    }else{
-                      //Cripto username e password per l'invio
-                      var key = "cd027Kgh";
-                      var crp_usr = stringToHex(des(key, user, 1, 0));
-                      var crp_pwd = stringToHex(des(key, pass, 1, 0));
-                      //Verifico che le credenziali siano giuste
-                      var url='http://www.confcommercioverona.it/app/check_login.php?usr='+crp_usr+'&pwd='+crp_pwd;
-                      if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
-                          var http=new XMLHttpRequest();
-                      } 
-                      else {
-                          var http=new ActiveXObject("Microsoft.XMLHTTP");
-                      }
-                      
-                      http.open('HEAD', url, false);
-                      http.send();
-                      if (http.status==404){
-                        alert("Le credenziali di accesso salvate non sono corrette!");
-                        window.location.replace("login.html");
-                      }   
-                    }
-                    
-                   
-                    }
-                    
-                    reader.readAsText(dbFile);
-                }, null);
-            }
-        }
-
-         //------------Fine funzioni------------------------------------
-
-          
-          function onLoad() {
-             //guardo il file
-            var fail =null;
-            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
-            //readText();
-            
-            //Da qui parte tutto
-            document.addEventListener("offline", onOffline, false);
-            document.addEventListener("online", onOnline, false);  
-            document.addEventListener("deviceready", checkLogin, false);
-                 
-            
-          }
-          
-          function onOffline() {
-              window.location.replace("offline.html");
-          }
-          
-          function onOnline() {
-             
-              
-          }
-          
-          function checkLogin(){
-          
-               try{ 
-    
-                      var pushNotification = window.plugins.pushNotification;
-                      if ( device.platform == 'android' || device.platform == 'Android' ){
-                            pushNotification.register(
-                                successHandler,
-                                errorHandler, {
-                                    "senderID":"1073127551296",
-                                    "ecb":"onNotificationGCM"
-                                });
-                        }else{
-                          pushNotification.register(
-                                 tokenHandler, 
-                                 errorHandler, {
-                                 "badge":"true",
-                                 "sound":"true",
-                                 "alert":"true",
-                                 "ecb":"onNotificationAPN"
-                                });	// required!
-                        }
-                  }
-            			catch(err){ 
-            					txt="There was an error on this page.\n\n"; 
-            					txt+="Error description: " + err.message + "\n\n"; 
-            					alert(txt); 
-            			}
-
-          }//fine checklogin cose iniziali
-
-        </script>
-
-    </head> 
-    <body class="corpo" onload="onLoad()">
-     <div class="header">
-        <h1 class="bar"></h1>
-            <div id="homebutton">
-        <a  href="javascript:history.back()">
-             <img src="img/icona.png" alt="Confcommercio Verona" style="vertical-align:middle;"/>
-        </a> <a  href="settings.html">settings</a>   
-  
-        </div>
-      </div> 
-      <div class="footer">
-        <h1 class="bar">&copy; <script>document.write(new Date().getFullYear())</script> Confcommercio Verona </h1>
-      </div>  
-      <div id="spacerhome">
-        </div> 
-        <div id="logo-wrap">
-          <img src="img/logo_big.png" alt="Confcommercio Verona" />
-        </div>
-        <div id="menu">
-        <ul>
-        
-          <li>
-          <a href="rassegna-stampa.html">Rassegna Stampa</a>
-          </li>
-          
-          <li>
-          <a href="video.html">Video</a>
-          </li> 
-          <li>
-          <a href="news-dal-sito.html">News dal sito</a>
-          </li>
-          <li>
-          <a href="corsi.html">Corsi di formazione</a>
-          </li>
-          <li>
-          <a href="il-commercio-veronese.html">Il Commercio Veronese</a>
-          </li>
-          <li>
-          <a href="prime-pagine.html">Prime Pagine Quotidiani</a>
-          </li>
-         
-        </ul>
-        <div>
-      </div>       
-      <div class="app"> 
-            <div id="deviceready" class="blink">
-                <p class="event listening"> </p>
-                <p class="event received"> </p>
-            </div>
-       </div>     
+    <div data-role="header">
+        <h1>Auth Demo</h1>
     </div>
-      <p id="debug">
-    </p> 
 
-  </body>
+    <div data-role="content">    
+
+        <form id="loginForm">
+        <div data-role="fieldcontain" class="ui-hide-label">
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" value="" placeholder="Username" />
+        </div>
+
+        <div data-role="fieldcontain" class="ui-hide-label">
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" value="" placeholder="Password" />
+        </div>
+
+        <input type="submit" value="Login" id="submitButton">
+        </form>
+        
+    </div>
+
+    <div data-role="footer">
+        <h4>&copy; Camden Enterprises</h4>
+    </div>
+
+</div>
+
+</body>
 </html>
