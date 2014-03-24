@@ -94,7 +94,7 @@
 
 
     function saveText(e) {
-      alert(document.getElementById('ricevinotifiche'));
+      //alert(document.getElementById('ricevinotifiche'));
       document.getElementById("definitions").style.display="block";
       $('definitions').innerHTML = "Salvataggio in corso...";
       
@@ -114,7 +114,7 @@
              ricevinotifiche='off';
       }
                                              
-      alert("notifiche: "+ricevinotifiche);
+      //alert("notifiche: "+ricevinotifiche);
       dbEntries.push(username + '***' + password + '***'+ ricevinotifiche);
 
   
@@ -127,9 +127,9 @@
             file.writer.object.write(username + '***' + password + '***'+ ricevinotifiche); 
             
            
-              alert(username + '***' + password + '***'+ ricevinotifiche);
+              //alert(username + '***' + password + '***'+ ricevinotifiche);
             
-              alert("deviceid=" +device.uuid);
+              //alert("deviceid=" +device.uuid);
               //Aggiorno lo stato delle notifiche sul db
               var url='http://www.confcommercioverona.it/app/notify_newdevice.php?deviceid='+device.uuid+'&notifiche='+ricevinotifiche;
                var ref = window.open(url, '_blank','hidden=yes');
@@ -146,8 +146,8 @@
    
    if (typeof username === 'undefined'){username="";}
    if (typeof password === 'undefined'){password="";}
-   alert("user: "+username);
-   alert("pass: "+password);
+   //alert("user: "+username);
+   //alert("pass: "+password);
    
    if(username.length==0 || password.length==0){
       window.location = "login.html";

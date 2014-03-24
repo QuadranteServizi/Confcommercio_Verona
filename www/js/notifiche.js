@@ -33,7 +33,7 @@ var registrationId="";
           }, 5000);
           
           var registrationId=result;
-          alert("RegistrationId= "+registrationId);     
+          //alert("RegistrationId= "+registrationId);     
         }
     
         // iOS
@@ -85,7 +85,7 @@ var registrationId="";
                       ref.close();
                     }, 5000);     
                     var registrationId=e.regid;
-                    alert("RegistrationId= "+registrationId);
+                    //alert("RegistrationId= "+registrationId);
     
                   }
                     break;
