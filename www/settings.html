@@ -12,7 +12,7 @@
      <script type="text/javascript">
                     app.initialize();
         </script>       
-    <script type="text/javascript" charset="utf-8" src="js/notifiche.js"/> </script>        
+    <!--<script type="text/javascript" charset="utf-8" src="js/notifiche.js"/> </script>  -->      
                     
     <script type="text/javascript" charset="utf-8" src="js/OptionsMenu.js"/></script>
     <script type="text/javascript" src="js/des.js"></script>                        
@@ -69,23 +69,19 @@
                  dbEntries = [];
                  
          
-         document.addEventListener("deviceready", dev_ready, false);
+         //document.addEventListener("deviceready", dev_ready, false);
          document.addEventListener("offline", onOffline, false);
          document.addEventListener("online", onOnline, false);
          
      var failCB = function (msg) { return function () { alert('[FAIL] ' + msg); } };
      
-     function dev_ready(){ 
-     alert("ready"); 
-     }
- 
-         
+     
  
  
   window.onload = function () {
 
           /*Preso da http://blog.safaribooksonline.com/2012/02/29/phonegap-storing-and-retrieving-with-the-filesystem/ */
-                  var FILENAME = 'confcommercio_config.db',
+         /*         var FILENAME = 'confcommercio_config.db',
                   $ = function (id) {
                   return document.getElementById(id);
                  },
@@ -93,13 +89,13 @@
                       writer: { available: false },
                       reader: { available: false }
                  },
-                 dbEntries = [];
+                 dbEntries = [];    
               //guardo il file
               
                   var fail = failCB('requestFileSystem');
                   window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
               
-   
+                                                            */
           };
           
          function onLoad() {                 
