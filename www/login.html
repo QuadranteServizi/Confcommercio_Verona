@@ -104,6 +104,15 @@
         }
 
     function readText() {
+            var FILENAME = 'confcommercio_config.db',
+             $ = function (id) {
+                  return document.getElementById(id);
+                 },
+                 file = {
+                      writer: { available: false },
+                      reader: { available: false }
+                 },
+                 dbEntries = [];
 
     if (file.entry) {
         file.entry.file(function (dbFile) {
