@@ -1,50 +1,49 @@
-var app = {
-    // Application Constructor
-    initialize: function() {
-        this.bindEvents();
-    },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-        document.addEventListener('offline', this.offLine, false);
-    },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicity call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-            alert("pronto");
-      
-          /*Preso da http://blog.safaribooksonline.com/2012/02/29/phonegap-storing-and-retrieving-with-the-filesystem/ */
-                  
-                  var failCB = function (msg) { return function () { alert('[FAIL] ' + msg); } };
-                  var FILENAME = 'confcommercio_config.db',
-                      $ = function (id) {
-                              return document.getElementById(id);
-                          },
-                      file = {
-                          writer: { available: false },
-                          reader: { available: false }
-                      },
-                      dbEntries = [];
-                      
-                      alert("qwwq");
-                  
-                  //guardo il file
-                  var fail = failCB('requestFileSystem');
-                  alert("qua");
-                  window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail); 
-                  alert("qua2");
-     },
-     offLine: function() {
-              window.location = "offline.html";
-          } 
-     
-};
- 
- 
-    
-    
+function init() {
+	document.addEventListener("deviceready", deviceReady, true);
+	delete init;
+}
+
+function checkPreAuth() {
+	console.log("checkPreAuth");
+    var form = $("#loginForm");
+    if(window.localStorage["username"] != undefined && window.localStorage["password"] != undefined) {
+        $("#username", form).val(window.localStorage["username"]);
+        $("#password", form).val(window.localStorage["password"]);
+        handleLogin();
+    }
+}
+
+function handleLogin() {
+    var form = $("#loginForm");    
+    //disable the button so we can't resubmit while we wait
+    $("#submitButton",form).attr("disabled","disabled");
+    var u = $("#username", form).val();
+    var p = $("#password", form).val();
+    if(u != '' && p!= '') {
+        $.post("http://www.coldfusionjedi.com/demos/2011/nov/10/service.cfc?method=login&returnformat=json", {username:u,password:p}, function(res) {
+            if(res == true) {
+                //store
+                window.localStorage["username"] = u;
+                window.localStorage["password"] = p;             
+                $.mobile.changePage("index.html");
+            } else {
+                navigator.notification.alert("Your login failed", function() {});
+            }
+         $("#submitButton").removeAttr("disabled");
+        },"json");
+    } else {
+        navigator.notification.alert("You must enter a username and password", function() {});
+        $("#submitButton").removeAttr("disabled");
+    }
+    return false;
+}
+
+function deviceReady() {
+	console.log("deviceReady");
+	$("#loginPage").on("pageinit",function() {
+		console.log("pageinit run");
+		$("#loginForm").on("submit",handleLogin);
+		checkPreAuth();
+	});
+	$.mobile.changePage("#loginPage");
+}
