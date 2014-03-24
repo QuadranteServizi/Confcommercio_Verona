@@ -71,13 +71,12 @@
                         
                     dbEntries = textArray.concat(dbEntries);
                     
-                    alert("sono qui");
                     
                     if (typeof user === 'undefined'){user="";}
                     if (typeof pass === 'undefined'){pass="";}
-                    alert("user "+ user);
+                    alert("user: "+ user);
                     if(user.length==0 && pass.length==0){
-                       window.location.replace("login.html");
+                       window.location = "login.html";
                     }else{
                       //Cripto username e password per l'invio
                       var key = "cd027Kgh";
@@ -130,7 +129,7 @@
           }
           
           function onOnline() {
-              alert("online");
+             
               
           }
           
