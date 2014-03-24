@@ -11,7 +11,8 @@ function checkPreAuth() {
     }
 }
 
-function handleLogin() {   
+function handleLogin() {  
+
     //disable the button so we can't resubmit while we wait
     document.getElementById("submitButton").disabled = true; 
     var u = document.getElementById('username').value;
