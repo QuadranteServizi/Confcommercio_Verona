@@ -8,10 +8,7 @@
     </title>
     <script src="phonegap.js"></script>                                           
     <script type="text/javascript" src="PushNotification.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/index.js"/> </script>
-     <script type="text/javascript">
-                    app.initialize();
-        </script>       
+   
     <script type="text/javascript" charset="utf-8" src="js/notifiche.js"/> </script>       
                     
     <script type="text/javascript" charset="utf-8" src="js/OptionsMenu.js"/></script>
@@ -54,6 +51,56 @@
       <p id="definitions" style="display:none;">
       </p>
       </div>
+      
+      <script type="text/javascript" charset="utf-8">
+
+    // Wait for Cordova to load
+    //
+    function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+
+    // Cordova is ready
+    //
+    function onDeviceReady() {
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+    }
+
+    function gotFS(fileSystem) {
+        fileSystem.root.getFile("confcommercio_config.db", null, gotFileEntry, fail);
+    }
+
+    function gotFileEntry(fileEntry) {
+        fileEntry.file(gotFile, fail);
+    }
+
+    function gotFile(file){
+        readDataUrl(file);
+        readAsText(file);
+    }
+
+    function readDataUrl(file) {
+        var reader = new FileReader();
+        reader.onloadend = function(evt) {
+            alert(evt.target.result);
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function readAsText(file) {
+        var reader = new FileReader();
+        reader.onloadend = function(evt) {
+            alert("Read as text");
+            alert(evt.target.result);
+        };
+        reader.readAsText(file);
+    }
+
+    function fail(evt) {
+        alert(evt.target.error.code);
+    }
+
+    </script>
 
    
 </body>
