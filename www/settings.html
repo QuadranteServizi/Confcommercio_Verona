@@ -74,8 +74,18 @@
           
          function onLoad() {                 
               /*Preso da http://blog.safaribooksonline.com/2012/02/29/phonegap-storing-and-retrieving-with-the-filesystem/ */
+                      var FILENAME = 'confcommercio_config.db',
+                  $ = function (id) {
+                  return document.getElementById(id);
+                 },
+                 file = {
+                      writer: { available: false },
+                      reader: { available: false }
+                 },
+                 dbEntries = [];
               //guardo il file
               var fail = failCB('requestFileSystem');
+              window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
               window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
           }
           function onOffline() {
@@ -87,7 +97,7 @@
           function gotFS(fs) {
             var fail =null;
             fs.root.getFile('confcommercio_config.db', {create: true, exclusive: false},
-                            gotFileEntry, null);
+                            gotFileEntry, fail);
          }
          
          function gotFileWriter(fileWriter) {
@@ -104,25 +114,19 @@
         }
 
     function readText() {
-        var FILENAME = 'confcommercio_config.db',
-             $ = function (id) {
-                  return document.getElementById(id);
-                 },
-                 file = {
-                      writer: { available: false },
-                      reader: { available: false }
-                 },
-                 dbEntries = [];
+    alert("read");
 
     if (file.entry) {
+        alert("read1");
         file.entry.file(function (dbFile) {
+        alert("read2");
             var reader = new FileReader();
             reader.onloadend = function (evt) {
                 var textArray = evt.target.result.split("***");
                 var user = textArray[0];
                 var pass = textArray[1];
                 var not = textArray[2];
-                
+                 alert("read3");
 
                 dbEntries = textArray.concat(dbEntries);
                 alert("user letto: "+user);
