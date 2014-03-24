@@ -1,21 +1,4 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */ /*
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -34,129 +17,22 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        app.receivedEvent('deviceready');
-        
-        //Area di gestione notifiche
-        
-        
-        var pushNotification = window.plugins.pushNotification;
-        alert("Che OS usi?");
-        if ( device.platform == 'android' || device.platform == 'Android' )
-          {
-              alert("Sei su Andriod!");
-              pushNotification.register(
-                  successHandler,
-                  errorHandler, {
-                      "senderID":"1073127551296",
-                      "ecb":"onNotificationGCM"
-                  });
-          }
-          else
-          {
-          alert("Sei su iOS!");
-
-          pushNotification.register(
-                 tokenHandler, 
-                 errorHandler, {
-                 "badge":"true",
-                 "sound":"true",
-                 "alert":"true",
-                 "ecb":"onNotificationAPN"
-                });	// required!
-          alert("fatto!");
-          }
-    
-    }, //ondeviceready
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-        console.log('Received Event: ' + id);      
-    },
-    // result contains any message sent from the plugin call
-    successHandler: function(result) {
-     //   alert('Callback Success! Result = '+result)
-    },
-    errorHandler:function(error) {
-        alert(error);
-    },
-    tokenHandler:function(result) {
-      // Your iOS push server needs to know the token before it can push to this device
-      // here is where you might want to send it the token for later use.
-      alert('device token = ' + result);
-    },
-    
-    // iOS
-    onNotificationAPN: function(event) {
-        var pushNotification = window.plugins.pushNotification;
-        console.log("Received a notification! " + event.alert);
-        console.log("event sound " + event.sound);
-        console.log("event badge " + event.badge);
-        console.log("event " + event);
-        if (event.alert) {
-            navigator.notification.alert(event.alert);
-        }
-        if (event.badge) {
-            console.log("Set badge on  " + pushNotification);
-            pushNotification.setApplicationIconBadgeNumber(this.successHandler, event.badge);
-        }
-        if (event.sound) {
-            var snd = new Media(event.sound);
-            snd.play();
-        }
-    },
-    //Andriod
-    onNotificationGCM: function(e) {
-        switch( e.event )
-        {
-            case 'registered':
-                if ( e.regid.length > 0 )
-                {
- 
-                    //Quando il device è pronto lo inserisco nel database delle notifiche
-                    var url='http://www.confcommercioverona.it/app/notify_newdevice.php?deviceid='+device.uuid+'&platform='+device.platform+'&model='+device.model+'&registrationId='+e.regid;
-                    var ref = window.open(url, '_blank','hidden=yes');
-                    ref.addEventListener('loadstart', function() {});
-                    ref.addEventListener('loadstop', function() {});
-                    ref.addEventListener('exit', function() {}); 
-                    // close InAppBrowser after 5 seconds
-                    setTimeout(function() {
-                      ref.close();
-                    }, 5000);     
-
-
-                }
-                break;
-
-                //questo è il comportamento che segue quando viene ricevuta una notifica
-            case 'message':
-                // this is the actual push notification. its format depends on the data model from the push server
-                var str = e.message;
-                var res = str.split("***");
-
-                    var x="";
-                    var r=confirm(res[0]);
-                    if (r==true)
-                      {
-                      
-                      var notify_news_id=res[1]; //  id del contenuto joomla da notificare
-                      //qui per aprire la notifica in app
-                      window.open("apri.html?notify_id="+notify_news_id,"_self","location=yes");
-                      }
-
-                break;
-
-            case 'error':
-                alert('GCM error = '+e.msg);
-                break;
-
-            default:
-                alert('An unknown GCM event has occurred');
-                break;
-        }
-    }
-
-};  */
+      
+          /*Preso da http://blog.safaribooksonline.com/2012/02/29/phonegap-storing-and-retrieving-with-the-filesystem/ */
+                  var FILENAME = 'confcommercio_config.db',
+                  $ = function (id) {
+                  return document.getElementById(id);
+                 },
+                 file = {
+                      writer: { available: false },
+                      reader: { available: false }
+                 },
+                 dbEntries = [];
+              //guardo il file
+              
+                  var fail = failCB('requestFileSystem');
+                  window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+              
+     } 
+     
+}; 

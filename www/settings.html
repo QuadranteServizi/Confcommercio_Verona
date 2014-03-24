@@ -8,6 +8,10 @@
     </title>
     <script src="phonegap.js"></script>                                           
     <script type="text/javascript" src="PushNotification.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/index.js"/> </script>
+     <script type="text/javascript">
+                    app.initialize();
+        </script>       
     <script type="text/javascript" charset="utf-8" src="js/notifiche.js"/> </script>        
                     
     <script type="text/javascript" charset="utf-8" src="js/OptionsMenu.js"/></script>
@@ -69,7 +73,7 @@
          document.addEventListener("offline", onOffline, false);
          document.addEventListener("online", onOnline, false);
          
-var failCB = function (msg) { return function () { alert('[FAIL] ' + msg); } };
+     var failCB = function (msg) { return function () { alert('[FAIL] ' + msg); } };
      
      function dev_ready(){ 
      alert("ready"); 
