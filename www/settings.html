@@ -108,8 +108,10 @@
                      
         function gotFileEntry(fileEntry) {
             var fail = failCB('createWriter');
+            alert("got");
             file.entry = fileEntry;
             fileEntry.createWriter(gotFileWriter, fail);
+            alert("chiamo read");
             readText();
         }
 
