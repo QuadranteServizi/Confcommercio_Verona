@@ -1,5 +1,6 @@
 function init() {
 	document.addEventListener("deviceready", deviceReady, true);
+  document.addEventListener("offline", onOffline, false);
 	delete init;
 }
 
@@ -12,7 +13,6 @@ function checkPreAuth() {
 }
 
 function handleLogin() {  
-
     //disable the button so we can't resubmit while we wait
     document.getElementById("submitButton").disabled = true; 
     var u = document.getElementById('username').value;
@@ -49,5 +49,9 @@ function handleLogin() {
 }
 
 function deviceReady() {
+  document.getElementById("launcherPage").style.display = "none";
   checkPreAuth(); 
+}
+function onOffline() {
+  window.location.replace("offline.html");
 }
