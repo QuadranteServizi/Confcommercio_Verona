@@ -62,20 +62,21 @@
                  dbEntries = [];
                  
          
-         //document.addEventListener("deviceready", checkLogin, false);
+         document.addEventListener("deviceready", dev_ready, false);
          document.addEventListener("offline", onOffline, false);
          document.addEventListener("online", onOnline, false);
          
-         var failCB = function (msg) {
-          return function () {
-          alert('[FAIL] ' + msg);
-          }
-          };
-          
-          window.onload = function () {
-          alert("dssd");
+var failCB = function (msg) { return function () { alert('[FAIL] ' + msg); } };
+     
+     function dev_ready(){ 
+     alert("ready"); 
+     }
+ 
+ 
+  window.onload = function () {
+
           /*Preso da http://blog.safaribooksonline.com/2012/02/29/phonegap-storing-and-retrieving-with-the-filesystem/ */
-                      var FILENAME = 'confcommercio_config.db',
+                  var FILENAME = 'confcommercio_config.db',
                   $ = function (id) {
                   return document.getElementById(id);
                  },
@@ -119,7 +120,6 @@
             alert("got");
             file.entry = fileEntry;
             fileEntry.createWriter(gotFileWriter, fail);
-            alert("chiamo read");
             readText();
         }
 
@@ -127,16 +127,16 @@
     alert("read");
 
     if (file.entry) {
-        alert("read1");
+        
         file.entry.file(function (dbFile) {
-        alert("read2");
+        
             var reader = new FileReader();
             reader.onloadend = function (evt) {
                 var textArray = evt.target.result.split("***");
                 var user = textArray[0];
                 var pass = textArray[1];
                 var not = textArray[2];
-                 alert("read3");
+                 
 
                 dbEntries = textArray.concat(dbEntries);
                 alert("user letto: "+user);
