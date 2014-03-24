@@ -30,7 +30,10 @@ function receivedEvent(id) {
           // close InAppBrowser after 5 seconds
           setTimeout(function() {
             ref.close();
-          }, 5000);     
+          }, 5000);
+          
+          var registrationId=result;
+          alert("RegistrationId= "+registrationId);     
         }
     
         // iOS
@@ -61,6 +64,7 @@ function receivedEvent(id) {
                 var snd = new Media(event.sound);
                 snd.play();
             }
+            
         }
         //Andriod
         function onNotificationGCM(e) {
@@ -81,7 +85,7 @@ function receivedEvent(id) {
                       ref.close();
                     }, 5000);     
                     var registrationId=e.regid;
-                    alert(registrationId);
+                    alert("RegistrationId= "+registrationId);
     
                   }
                     break;
