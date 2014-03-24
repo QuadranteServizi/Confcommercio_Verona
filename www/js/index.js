@@ -38,7 +38,7 @@ function handleLogin() {
       }else{
           window.localStorage["username"] = u;
           window.localStorage["password"] = p;
-          window.location.replace("news-dal-sito.html"); 
+          window.location.replace("menu.html"); 
       }           
     } else {
         navigator.notification.alert("Devi inserire username e password!", function() {});
@@ -48,6 +48,6 @@ function handleLogin() {
 }
 
 function deviceReady() {
-	$("#loginPage").on("pageinit",function() {	$("#loginForm").on("submit",handleLogin);  		checkPreAuth();  	});
-	$.mobile.changePage("#loginPage");
+  checkPreAuth(); 
+	window.location.replace("index.html"); 
 }
