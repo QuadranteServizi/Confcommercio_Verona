@@ -83,7 +83,6 @@
               window.location.replace("offline.html");
           }
           function onOnline() {
-              inizializzanotifiche();
               
           }
           
@@ -186,7 +185,7 @@ var failCB = function (msg) {
         alert('[FAIL] ' + msg);
     }
 };
-
+/*
 function gotFS(fs) {
     var fail = failCB('getFile');
     fs.root.getFile(FILENAME, {create: true, exclusive: false},
@@ -198,6 +197,26 @@ function gotFileWriter(fileWriter) {
     file.writer.available = true;
     file.writer.object = fileWriter;
 }
+  */
+
+ function gotFS(fs) {
+            var fail =null;
+            fs.root.getFile('confcommercio_config.db', {create: true, exclusive: false},
+                            gotFileEntry, null);
+         }
+         
+         function gotFileWriter(fileWriter) {
+              file.writer.available = true;
+              file.writer.object = fileWriter;
+          }
+
+                     
+        function gotFileEntry(fileEntry) {
+            var fail = failCB('createWriter');
+            file.entry = fileEntry;
+            fileEntry.createWriter(gotFileWriter, fail);
+            readText();
+        }
 
 function readText() {
 
@@ -256,14 +275,6 @@ function readText() {
     }
 }
 
-
-function gotFileEntry(fileEntry) {
-    var fail = failCB('createWriter');
-    file.entry = fileEntry;
-
-    fileEntry.createWriter(gotFileWriter, fail);
-    readText();
-}
 
 
 document.addEventListener('deviceready', function () {
