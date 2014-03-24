@@ -130,49 +130,38 @@
           }
           
           function onOnline() {
-               try{ 
-
-                  var pushNotification = window.plugins.pushNotification;
-                  if ( device.platform == 'android' || device.platform == 'Android' ){
-                        pushNotification.register(
-                            successHandler,
-                            errorHandler, {
-                                "senderID":"1073127551296",
-                                "ecb":"onNotificationGCM"
-                            });
-                    }else{
-                      pushNotification.register(
-                             tokenHandler, 
-                             errorHandler, {
-                             "badge":"true",
-                             "sound":"true",
-                             "alert":"true",
-                             "ecb":"onNotificationAPN"
-                            });	// required!
-                    }
-              }
-        			catch(err){ 
-        					txt="There was an error on this page.\n\n"; 
-        					txt+="Error description: " + err.message + "\n\n"; 
-        					alert(txt); 
-        			}
+              alert("online");
+              
           }
           
           function checkLogin(){
-                
-              
-              
-              /*Sezione che legge il file di configurazione, verifica se le credenziali hanno accesso a Joomla 
-              e in caso positivo permette l'utilizzo dell'APP
-              in caso negativo rimanda alla pagina delle impostazioni
-              */
-              
           
-          
-          
-               //sezione notifiche, sostituisce index.js che con iOS non va più
-
-
+               try{ 
+    
+                      var pushNotification = window.plugins.pushNotification;
+                      if ( device.platform == 'android' || device.platform == 'Android' ){
+                            pushNotification.register(
+                                successHandler,
+                                errorHandler, {
+                                    "senderID":"1073127551296",
+                                    "ecb":"onNotificationGCM"
+                                });
+                        }else{
+                          pushNotification.register(
+                                 tokenHandler, 
+                                 errorHandler, {
+                                 "badge":"true",
+                                 "sound":"true",
+                                 "alert":"true",
+                                 "ecb":"onNotificationAPN"
+                                });	// required!
+                        }
+                  }
+            			catch(err){ 
+            					txt="There was an error on this page.\n\n"; 
+            					txt+="Error description: " + err.message + "\n\n"; 
+            					alert(txt); 
+            			}
 
           }//fine checklogin cose iniziali
 

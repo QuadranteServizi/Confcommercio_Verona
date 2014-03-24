@@ -142,15 +142,14 @@
                }, 5000);   
                //qui devo vedere perchè il deviceid non va
 
-            
-
    }
    
    if (typeof user === 'undefined'){user="";}
    if (typeof pass === 'undefined'){pass="";}
-   alert(user);
+   alert("user "+user);
+   alert("pass "+pass);
    
-   if(user.length==0 && pass.length==0){
+   if(user.length==0 || pass.length==0){
       window.location.replace("login.html");
    }else{
      //Cripto username e password per l'invio

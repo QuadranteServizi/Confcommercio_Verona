@@ -1,6 +1,6 @@
 var registrationId="";
 
-function receivedEvent(id) {
+        function receivedEvent(id) {
             var parentElement = document.getElementById(id);
             var listeningElement = parentElement.querySelector('.listening');
             var receivedElement = parentElement.querySelector('.received');
