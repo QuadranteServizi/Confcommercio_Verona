@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, user-scalable=no">        
     <link type="text/css" rel="stylesheet" href="css/custom.css">        
     <title>Confcommercio Verona
-    </title>                                           
+    </title>
+    <script src="phonegap.js"></script>                                           
     <script type="text/javascript" src="PushNotification.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/notifiche.js"/> </script>        
                     
@@ -49,10 +50,10 @@
       <p id="definitions" style="display:none;">
       </p>
       </div>
-      <script src="phonegap.js"></script>
+
       <script type="text/javascript" charset="utf-8">
       
-      this.init = function(){
+  
       var FILENAME = 'confcommercio_config.db',
              $ = function (id) {
                   return document.getElementById(id);
@@ -73,9 +74,7 @@ var failCB = function (msg) { return function () { alert('[FAIL] ' + msg); } };
      function dev_ready(){ 
      alert("ready"); 
      }
-
-}
-      
+ 
          
  
  
