@@ -24,7 +24,7 @@
       <h1 class="bar">&copy; 
 <script>document.write(new Date().getFullYear()); 
         
-        </script> Confcommercio Verona </h1>      
+        </script> Confcommercio Verona </h1> <a  href="settings.html">settings</a>      
     </div>         
     <div id="spacerhome">        
     </div>          
@@ -80,7 +80,7 @@
           }
           
           function onOffline() {
-              window.location.replace("offline.html");
+              window.location = "offline.html";
           }
           function onOnline() {
               
@@ -170,7 +170,7 @@
      if (http.status!=404){
          document.getElementById("definitions").style.display="block";
          $('definitions').innerHTML = "Le credenziali di accesso sono corrette!<br>Ora puoi utilizzare la APP";
-         setTimeout(function() {window.location.replace("index.html");}, 1000);
+         setTimeout(function() {window.location = "index.html";}, 2000);
      }else{
          document.getElementById("definitions").style.display="block";
          $('definitions').innerHTML = "Le credenziali di accesso non sono corrette!";  
@@ -236,7 +236,9 @@ function readText() {
                 
 
                 dbEntries = textArray.concat(dbEntries);
-
+            alert("user letto: "+user);
+            alert("pass letta: "+pass);
+            alert("not letto: "+not);
             document.getElementById('username').value=user;
            if (typeof pass === 'undefined'){
               document.getElementById('password').value="";
@@ -269,7 +271,7 @@ function readText() {
             if (http.status!=404){
               document.getElementById("definitions").style.display="block";
               $('definitions').innerHTML = "Le credenziali di accesso sono corrette!<br>Ora puoi utilizzare la APP";
-              setTimeout(function() {window.location.replace("index.html");}, 1000);
+              setTimeout(function() {window.location = "index.html";}, 1000);
             }else{
               document.getElementById("definitions").style.display="block";
               $('definitions').innerHTML = "Le credenziali di accesso non sono corrette!";  
