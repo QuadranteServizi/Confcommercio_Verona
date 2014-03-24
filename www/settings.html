@@ -84,9 +84,11 @@
                  },
                  dbEntries = [];
               //guardo il file
-              var fail = failCB('requestFileSystem');
-              window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
-              window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+              document.addEventListener('deviceready', function () {
+                  var fail = failCB('requestFileSystem');
+                  window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+              }, false);
+
           }
           function onOffline() {
               window.location = "offline.html";
