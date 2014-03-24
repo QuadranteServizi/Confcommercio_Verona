@@ -72,8 +72,8 @@
           }
           };
           
-         function onLoad() {                 
-              /*Preso da http://blog.safaribooksonline.com/2012/02/29/phonegap-storing-and-retrieving-with-the-filesystem/ */
+          window.onload = function () {
+          /*Preso da http://blog.safaribooksonline.com/2012/02/29/phonegap-storing-and-retrieving-with-the-filesystem/ */
                       var FILENAME = 'confcommercio_config.db',
                   $ = function (id) {
                   return document.getElementById(id);
@@ -88,6 +88,11 @@
                   var fail = failCB('requestFileSystem');
                   window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
               }, false);
+   
+          };
+          
+         function onLoad() {                 
+              
 
           }
           function onOffline() {
