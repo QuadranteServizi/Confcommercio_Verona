@@ -8,9 +8,7 @@ function checkPreAuth() {
         document.getElementById('username').value=window.localStorage["username"];
         document.getElementById('password').value=window.localStorage["password"];
         handleLogin();
-    } else{
-      window.location.replace("index.html");
-    }
+    } 
 }
 
 function handleLogin() {  
