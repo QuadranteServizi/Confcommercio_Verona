@@ -51,7 +51,9 @@
       </div>
       <script src="phonegap.js"></script>
       <script type="text/javascript" charset="utf-8">
-         var FILENAME = 'confcommercio_config.db',
+      
+      this.init = function(){
+      var FILENAME = 'confcommercio_config.db',
              $ = function (id) {
                   return document.getElementById(id);
                  },
@@ -71,6 +73,10 @@ var failCB = function (msg) { return function () { alert('[FAIL] ' + msg); } };
      function dev_ready(){ 
      alert("ready"); 
      }
+
+}
+      
+         
  
  
   window.onload = function () {
