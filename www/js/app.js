@@ -80,7 +80,7 @@ function receivedEvent(id) {
                 
                 navigator.notification.confirm(
                     "test",                             // message
-                    window.open("apri.html?notify_id="+res[1],"_self","location=yes"),      
+                    window.location.replace("apri.html?notify_id="+res[1],"_self","location=yes"),      
                     "Confcommercio Verona",             // title
                     'Si,No'                             // buttonLabels
                 ); 
