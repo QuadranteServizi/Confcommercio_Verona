@@ -7,6 +7,8 @@ function init() {
 //Sezione per le notifiche ad Android e iOS
 
 function addNotify() {
+    alert("addNotify");
+    alert(device.platform);
     try{ 
         var pushNotification = window.plugins.pushNotification;
         if ( device.platform == 'android' || device.platform == 'Android' ){  
@@ -86,22 +88,8 @@ function receivedEvent(id) {
               }    
               
               
-                  
-                  /*
-                  
-            if (event.alert) {
-                var str = event.alert;
-                var res = str.split("***");
-
-                navigator.notification.confirm(
-                    res[0],                             // message
-                    window.open("apri.html?notify_id="+res[1],"_self","location=yes"),
-                    alert("fsdfsdfdsfds"),       
-                    "Confcommercio Verona",             // title
-                    'Si,No'                             // buttonLabels
-                );  
-                */
-            }
+                
+            
             if (event.badge) {
                 console.log("Set badge on  " + pushNotification);
                 pushNotification.setApplicationIconBadgeNumber(this.successHandler, event.badge);
@@ -168,6 +156,7 @@ function receivedEvent(id) {
 //Funzioni generiche
 
 function deviceReady() {
+alert("ready");
   addNotify();
 }
 function onOffline() {
