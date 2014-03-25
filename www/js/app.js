@@ -8,7 +8,6 @@ function init() {
 
 function addNotify() {
     try{ 
-      alert(device.platform);
         var pushNotification = window.plugins.pushNotification;
         if ( device.platform == 'android' || device.platform == 'Android' ){  
            pushNotification.register(
@@ -78,10 +77,11 @@ function receivedEvent(id) {
             //alert("event badge " + event.badge);
             //alert("event " + event);
             if (event.alert) {
-                //navigator.notification.alert(event.alert);
                 var str = event.alert;
                 var res = str.split("***");
     
+                navigator.notification.alert(res[0]);
+                
                 var x="";
                 var r=confirm(res[0]);
                 if (r==true){
