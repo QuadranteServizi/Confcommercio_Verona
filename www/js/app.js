@@ -7,8 +7,6 @@ function init() {
 //Sezione per le notifiche ad Android e iOS
 
 function addNotify() {
-    alert("addNotify");
-    alert(device.platform);
     try{ 
         var pushNotification = window.plugins.pushNotification;
         if ( device.platform == 'android' || device.platform == 'Android' ){  
@@ -50,9 +48,7 @@ function receivedEvent(id) {
         function errorHandler(error) {
             alert(error);
         }
-        function tokenHandler(result) {
-          alert("test");
-          alert(device.platform);      
+        function tokenHandler(result) {    
           //Quando il token è pronto lo inserisco nel database delle notifiche
           var url='http://www.confcommercioverona.it/app/notify_newdevice.php?deviceid='+device.uuid+'&platform='+device.platform+'&model='+device.model+'&registrationId='+result;
           //ricordarsi l'encodeURI per iOS
@@ -76,8 +72,8 @@ function receivedEvent(id) {
                 
                 navigator.notification.confirm(
                     res[0],                             // message
-                    window.location.replace("apri.html?notify_id="+res[1]),      
-                    "Confcommercio Verona",             // title
+                    function(){window.location.replace("apri.html?notify_id="+res[1])},      
+                    "Confcommercio Veronax",             // title
                     'Si,No'                             // buttonLabels
                 ); 
               }    
@@ -151,7 +147,6 @@ function receivedEvent(id) {
 //Funzioni generiche
 
 function deviceReady() {
-alert("ready");
   addNotify();
 }
 function onOffline() {
