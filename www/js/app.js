@@ -75,7 +75,8 @@ function receivedEvent(id) {
 
                 navigator.notification.confirm(
                     res[0],                             // message
-                    window.open("apri.html?notify_id="+res[1],"_self","location=yes"),       
+                    /*window.open("apri.html?notify_id="+res[1],"_self","location=yes"),*/
+                    alert("fsdfsdfdsfds"),       
                     "Confcommercio Verona",             // title
                     'Si,No'                             // buttonLabels
                 );  
