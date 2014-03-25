@@ -68,18 +68,40 @@ function receivedEvent(id) {
         // iOS
         function onNotificationAPN(event) {
             var pushNotification = window.plugins.pushNotification;
-
+                  
+              alert("dssdds");
+              
+              if (event.alert) {
+                  alert("eccolo"+event.alert);
+                  var str = event.alert;
+                    var res = str.split("***");
+                  alert("res[0]:"+res[0]); 
+                  alert("res[1]:"+res[1]);   
+                
+                navigator.notification.confirm(
+                    "test",                             // message
+                    window.open("apri.html?notify_id="+res[1],"_self","location=yes"),      
+                    "Confcommercio Verona",             // title
+                    'Si,No'                             // buttonLabels
+                ); 
+              }    
+              
+              
+                  
+                  /*
+                  
             if (event.alert) {
                 var str = event.alert;
                 var res = str.split("***");
 
                 navigator.notification.confirm(
                     res[0],                             // message
-                    /*window.open("apri.html?notify_id="+res[1],"_self","location=yes"),*/
+                    window.open("apri.html?notify_id="+res[1],"_self","location=yes"),
                     alert("fsdfsdfdsfds"),       
                     "Confcommercio Verona",             // title
                     'Si,No'                             // buttonLabels
                 );  
+                */
             }
             if (event.badge) {
                 console.log("Set badge on  " + pushNotification);
