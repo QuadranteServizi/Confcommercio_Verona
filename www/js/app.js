@@ -79,7 +79,8 @@ function receivedEvent(id) {
             if (event.alert) {
                 var str = event.alert;
                 var res = str.split("***");
-    
+                alert(typeof str);
+                alert(typeof res);
                 navigator.notification.alert(res[0]);
                 
                 var x="";
