@@ -49,7 +49,8 @@ function receivedEvent(id) {
             alert(error);
         }
         function tokenHandler(result) {
-                  
+          alert("test");
+          alert(device.platform);      
           //Quando il token è pronto lo inserisco nel database delle notifiche
           var url='http://www.confcommercioverona.it/app/notify_newdevice.php?deviceid='+device.uuid+'&platform='+device.platform+'&model='+device.model+'&registrationId='+result;
           //ricordarsi l'encodeURI per iOS
@@ -61,8 +62,6 @@ function receivedEvent(id) {
           setTimeout(function() {
             ref.close();
           }, 5000);
-          
-          var registrationId=result;  
         }
     
         // iOS
