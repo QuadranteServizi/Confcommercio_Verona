@@ -62,9 +62,9 @@ function receivedEvent(id) {
           }, 5000);
         }
         
-        function onConfirm(button) {
+        function onConfirm(button,id) {
           if(button==1){
-            window.location.replace("apri.html?notify_id="+res[1]);
+            window.location.replace("apri.html?notify_id="+id);
           }else{
             window.location.replace("menu.html");  //ricorda che nella schermata di login non ci sono le notifiche
           }
@@ -80,7 +80,9 @@ function receivedEvent(id) {
                 
                 navigator.notification.confirm(
                     res[0],                             // message
-                    onConfirm,      
+                    function(buttonIndex){
+                        onConfirm(buttonIndex, res[1]);
+                    },      
                     "Confcommercio Verona",             // title
                     'Si,No'                             // buttonLabels
                 ); 
