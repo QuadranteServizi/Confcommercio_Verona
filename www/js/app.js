@@ -49,10 +49,7 @@ function receivedEvent(id) {
             alert(error);
         }
         function tokenHandler(result) {
-          // Your iOS push server needs to know the token before it can push to this device
-          // here is where you might want to send it the token for later use.
-          //alert('device token = ' + result);
-          
+                  
           //Quando il token è pronto lo inserisco nel database delle notifiche
           var url='http://www.confcommercioverona.it/app/notify_newdevice.php?deviceid='+device.uuid+'&platform='+device.platform+'&model='+device.model+'&registrationId='+result;
           //ricordarsi l'encodeURI per iOS
@@ -65,31 +62,23 @@ function receivedEvent(id) {
             ref.close();
           }, 5000);
           
-          var registrationId=result;
-          //alert("RegistrationId= "+registrationId);     
+          var registrationId=result;  
         }
     
         // iOS
         function onNotificationAPN(event) {
             var pushNotification = window.plugins.pushNotification;
-            //alert("Received a notification! " + event.alert);
-            //alert("event sound " + event.sound);
-            //alert("event badge " + event.badge);
-            //alert("event " + event);
+
             if (event.alert) {
                 var str = event.alert;
                 var res = str.split("***");
-                alert(typeof str);
-                alert(res[0]);
-                navigator.notification.alert(res[0]);
-                
-                var x="";
-                var r=confirm(res[0]);
-                if (r==true){
-                    var notify_news_id=res[1]; //  id del contenuto joomla da notificare
-                    //qui per aprire la notifica in app
-                    window.open("apri.html?notify_id="+notify_news_id,"_self","location=yes");
-                }
+
+                navigator.notification.confirm(
+                    res[0],                             // message
+                    window.open("apri.html?notify_id="+res[1],"_self","location=yes"),       
+                    "Confcommercio Verona",             // title
+                    'Si,No'                             // buttonLabels
+                );  
             }
             if (event.badge) {
                 console.log("Set badge on  " + pushNotification);
