@@ -67,7 +67,7 @@ function receivedEvent(id) {
     
         // iOS
         function onNotificationAPN(event) {
-            var pushNotification = window.plugins.pushNotification;
+
                   
               alert("dssdds");
               
