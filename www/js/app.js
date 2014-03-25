@@ -68,20 +68,15 @@ function receivedEvent(id) {
     
         // iOS
         function onNotificationAPN(event) {
-
-                  
-              alert("dssdds");
               
               if (event.alert) {
-                  alert("eccolo"+event.alert);
+
                   var str = event.alert;
-                    var res = str.split("***");
-                  alert("res[0]:"+res[0]); 
-                  alert("res[1]:"+res[1]);   
+                  var res = str.split("***");   
                 
                 navigator.notification.confirm(
-                    "test",                             // message
-                    window.location.replace("apri.html?notify_id="+res[1],"_self","location=yes"),      
+                    res[0],                             // message
+                    window.location.replace("apri.html?notify_id="+res[1]),      
                     "Confcommercio Verona",             // title
                     'Si,No'                             // buttonLabels
                 ); 
