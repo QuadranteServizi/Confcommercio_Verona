@@ -61,6 +61,14 @@ function receivedEvent(id) {
             ref.close();
           }, 5000);
         }
+        
+        function onConfirm(button) {
+          if(button==1){
+            window.location.replace("apri.html?notify_id="+res[1]);
+          }else{
+            window.location.replace("menu.html");  //ricorda che nella schermata di login non ci sono le notifiche
+          }
+        }
     
         // iOS
         function onNotificationAPN(event) {
@@ -72,15 +80,12 @@ function receivedEvent(id) {
                 
                 navigator.notification.confirm(
                     res[0],                             // message
-                    function(){window.location.replace("apri.html?notify_id="+res[1])},      
-                    "Confcommercio Veronax",             // title
+                    onConfirm,      
+                    "Confcommercio Verona",             // title
                     'Si,No'                             // buttonLabels
                 ); 
               }    
-              
-              
-                
-            
+
             if (event.badge) {
                 console.log("Set badge on  " + pushNotification);
                 pushNotification.setApplicationIconBadgeNumber(this.successHandler, event.badge);
