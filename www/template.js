@@ -14,4 +14,20 @@ document.write('<div id="spacerhome">');
 document.write('</div>'); 
 document.write('<div id="logo-wrap">');
 document.write('<img src="img/logo_big.png" alt="Confcommercio Verona" />');
+document.write('</div>');  
+ /*
+document.write('<div id="wrap">');
+document.write('<div class="back">');
+document.write('<a href="javascript:history(-1);">');
+document.write('<<');
+document.write('</a>');
 document.write('</div>');
+document.write('<div class="home">');
+document.write('home');
+document.write('</div>');
+document.write('<div class="trigger">');
+document.write('<div id="trigger-cont">');
+document.write('<span></span>');
+document.write('</div>');
+document.write('</div>');
+document.write('</div>');    */
