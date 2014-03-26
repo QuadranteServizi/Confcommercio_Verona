@@ -1,3 +1,25 @@
+var app = {
+ 
+    initialize: function() {
+        this.bind();
+    },
+ 
+    bind: function() {
+        document.addEventListener('deviceready', this.deviceready, false);
+    },
+ 
+    deviceready: function() {
+        app.report('http://www.google.it');
+    },
+ 
+    report: function(id) {
+         
+        myURL = encodeURI(id);
+        window.open(myURL, '_system');
+    }
+};
+
+
 function init() {
 	document.addEventListener("deviceready", deviceReady, true);
   document.addEventListener("offline", onOffline, false);
@@ -159,9 +181,10 @@ function receivedEvent(id) {
 
 //Funzioni generiche
 
-function deviceReady() {
-  addNotify();
-}
-function onOffline() {
-  window.location.replace("offline.html");
+function deviceReady() { 
+  alert("ready"); 
+  addNotify(); 
+} 
+function onOffline() { 
+  window.location.replace("offline.html"); 
 }
