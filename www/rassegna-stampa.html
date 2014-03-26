@@ -42,6 +42,7 @@
     //
     function onDeviceReady() {
          alert('Device is ready!');
+         window.open('http://www.wikipedia.org','_system','location=yes');
          //iabRef = window.open('http://apache.org', '_blank', 'location=yes');
          //iabRef.addEventListener('loadstart', iabLoadStart);
          //iabRef.addEventListener('loadstop', iabLoadStop);
@@ -58,7 +59,7 @@
     <p>link test<br /><br />
   <a href="#" onclick="window.open('http://www.wikipedia.org','_self','location=yes')">Wikipedia (webview)</a><br /><br />
   <a href="#" onclick="window.open('http://www.wikipedia.org','_blank','location=yes')">Wikipedia (inAppBrowser)</a><br /><br />
-  <a href="#" onclick="window.open('http://www.wikipedia.org','_system','location=yes');deviceReady();return false;">Wikipedia (mobile browser)</a><br /><br />
+  <a href="#" onclick="window.open('http://www.wikipedia.org','_system','location=yes');onDeviceReady('http://www.wikipedia.org');return false;">Wikipedia (mobile browser)</a><br /><br />
   </p>
   <p>button test<br /><br />
   <button type="button" onclick="window.open('http://www.wikipedia.org','_self','location=yes')">Wikipedia (webview)</button><br /><br />
