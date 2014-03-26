@@ -47,10 +47,18 @@ for (var i=0, sw; sw = switches[i++]; ) {
 	sw.parentNode.insertBefore(div, sw.nextSibling);
 }
 
+if(window.localStorage["notifiche_off"]){
+  document.getElementById("notifiche").checked = false;
+}else{
+//default sono on
+}
+
 function handleClick(cb) {
   if(cb.checked){
+    window.localStorage["notifiche_on"];
     abilitaNotifiche();  
   }else{
+    window.localStorage["notifiche_off"];
     disabilitaNotifiche();
   }
   
