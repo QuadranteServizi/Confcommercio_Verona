@@ -27,7 +27,7 @@ document.write('	<div class="home">');
 document.write('	<a href="menu.html"><img src="img/menu.png"></a>');
 document.write('	</div>');
 document.write('	<div class="trigger">');
-document.write('			<span><label><input type="checkbox" id="notifiche" class="ios-switch" checked /></label></span>');
+document.write('			<span><label><input type="checkbox" id="notifiche" class="ios-switch" checked onclick="handleClick(this);"/></label></span>');
 document.write('	</div>');
 document.write('</div>');
 document.write('<div id="spacerhome">');
@@ -45,4 +45,13 @@ for (var i=0, sw; sw = switches[i++]; ) {
 	var div = document.createElement('div');
 	div.className = 'switch';
 	sw.parentNode.insertBefore(div, sw.nextSibling);
+}
+
+function handleClick(cb) {
+  if(cb.checked){
+    abilitaNotifiche();  
+  }else{
+    disabilitaNotifiche();
+  }
+  
 }

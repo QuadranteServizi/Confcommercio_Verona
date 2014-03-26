@@ -33,6 +33,34 @@ function addNotify() {
     }
 }
 
+function abilitaNotifiche(){
+//vedi template.js per il trigger
+        var url='http://www.confcommercioverona.it/app/notify_newdevice.php?deviceid='+device.uuid+'&notifiche=on';
+        var ref = window.open(url, '_blank','hidden=yes');
+        ref.addEventListener('loadstart', function() {});
+        ref.addEventListener('loadstop', function() {});
+        ref.addEventListener('exit', function() {}); 
+        // close InAppBrowser after 5 seconds
+        setTimeout(function() {
+           ref.close();
+        }, 5000);  
+}
+
+function disabilitaNotifiche(){
+//vedi template.js per il trigger
+        var url='http://www.confcommercioverona.it/app/notify_newdevice.php?deviceid='+device.uuid+'&notifiche=off';
+        var ref = window.open(url, '_blank','hidden=yes');
+        ref.addEventListener('loadstart', function() {});
+        ref.addEventListener('loadstop', function() {});
+        ref.addEventListener('exit', function() {}); 
+        // close InAppBrowser after 5 seconds
+        setTimeout(function() {
+           ref.close();
+        }, 5000);  
+}
+
+
+
 function receivedEvent(id) {
             var parentElement = document.getElementById(id);
             var listeningElement = parentElement.querySelector('.listening');
