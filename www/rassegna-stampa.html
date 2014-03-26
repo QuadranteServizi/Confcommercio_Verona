@@ -13,43 +13,6 @@
          
 <script type="text/javascript" src="template.js"></script>              
  
-
-<script type="text/javascript" charset="utf-8">
-
-    // Wait for Cordova to load
-    //
-    document.addEventListener("deviceready", onDeviceReady, false);
-
-    // Global InAppBrowser reference
-    var iabRef = null;
-
-    function iabLoadStart(event) {
-        alert(event.type + ' - ' + event.url);
-    }
-
-    function iabLoadStop(event) {
-        alert(event.type + ' - ' + event.url);
-    }
-
-    function iabClose(event) {
-         alert(event.type);
-         iabRef.removeEventListener('loadstart', iabLoadStart);
-         iabRef.removeEventListener('loadstop', iabLoadStop);
-         iabRef.removeEventListener('exit', iabClose);
-    }
-
-    // Cordova is ready
-    //
-    function onDeviceReady() {
-         alert('Device is ready!');
-         window.open('http://www.wikipedia.org','_system','location=yes');
-         //iabRef = window.open('http://apache.org', '_blank', 'location=yes');
-         //iabRef.addEventListener('loadstart', iabLoadStart);
-         //iabRef.addEventListener('loadstop', iabLoadStop);
-         //iabRef.addEventListener('exit', iabClose);
-    }
-
-    </script>
                    
   </head>            
   <body class="corpo" onload="init()">         
@@ -61,6 +24,13 @@
   <a href="#" onclick="window.open('http://www.wikipedia.org','_blank','location=yes')">Wikipedia (inAppBrowser)</a><br /><br />
   <a href="#" onclick="window.open('http://www.wikipedia.org','_system','location=yes');onDeviceReady('http://www.wikipedia.org');return false;">Wikipedia (mobile browser)</a><br /><br />
   </p>
+    <ul>
+        <li onclick="redirectToSystemBrowser('http://www.google.it');">link to something</li>
+    </ul>
+    
+      <a onclick="redirectToSystemBrowser('http://www.google.it');">link to something</a>
+  
+  
   <p>button test<br /><br />
   <button type="button" onclick="window.open('http://www.wikipedia.org','_self','location=yes')">Wikipedia (webview)</button><br /><br />
   <button type="button" onclick="window.open('http://www.wikipedia.org','_blank','location=yes')">Wikipedia (inAppBrowser)</button><br /><br />

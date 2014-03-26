@@ -7,9 +7,15 @@ function init() {
 //Sezione per le notifiche ad Android e iOS
 
 
-function openURL(urlString){
-    myURL = encodeURI(urlString);
-    window.open(myURL, '_system');
+// window.open wasn't opening a link in the system browser on iOS, so we have to use this function (requires phonegap.js)
+function redirectToSystemBrowser(url) {
+    // Wait for Cordova to load
+    document.addEventListener('deviceready', onDeviceReady2, false);
+    // Cordova is ready
+    function onDeviceReady2() {
+        // open URL in default web browser
+        var ref = window.open(encodeURI(url), '_system', 'location=yes');
+    }
 }
 
 function addNotify() {
