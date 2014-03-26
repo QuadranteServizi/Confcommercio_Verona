@@ -7,14 +7,10 @@ function init() {
 //Sezione per le notifiche ad Android e iOS
 
 
-function onda() {
-         var ref = window.open('http://apache.org', '_system', 'location=yes');
-         ref.addEventListener('loadstart', function(event) { alert('start: ' + event.url); });
-         ref.addEventListener('loadstop', function(event) { alert('stop: ' + event.url); });
-         ref.addEventListener('loaderror', function(event) { alert('error: ' + event.message); });
-         ref.addEventListener('exit', function(event) { alert(event.type); });
-    }
-
+function openURL(urlString){
+    myURL = encodeURI(urlString);
+    window.open(myURL, '_system');
+}
 
 function addNotify() {
     try{ 
