@@ -15,6 +15,4 @@ document.write('</div>');
 document.write('<div id="logo-wrap">');
 document.write('<img src="img/logo_big.png" alt="Confcommercio Verona" />');
 document.write('</div>');  
-alert('init?');
-init();
 

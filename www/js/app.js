@@ -6,9 +6,6 @@ function init() {
 
 //Sezione per le notifiche ad Android e iOS
 
-
-
-
 function addNotify() {
     try{ 
         var pushNotification = window.plugins.pushNotification;
@@ -157,7 +154,6 @@ function receivedEvent(id) {
 //Funzioni generiche
 
 function deviceReady() { 
- 
   addNotify(); 
 } 
 function onOffline() { 
