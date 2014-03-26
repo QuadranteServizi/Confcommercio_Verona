@@ -14,6 +14,7 @@ function redirectToSystemBrowser(url) {
     // Cordova is ready
     function onDeviceReady2() {
         // open URL in default web browser
+        alert("ora!");
         var ref = window.open(encodeURI(url), '_system', 'location=yes');
     }
 }
