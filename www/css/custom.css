@@ -326,13 +326,12 @@ li:last-of-type { border: 0px; }
   #spacerhome{
     margin-top:65px;
    }
+
 }
 
 @media screen and (min-height: 480px) {
 
- /*body {
-  background: blue; 
- }      */
+    
  .footer {
    display:block;
  }
@@ -436,7 +435,7 @@ li:last-of-type { border: 0px; }
 }
 
 :root input[type="checkbox"].ios-switch + div:before {
-	content: 'On';
+	content: 'News';
 	float: left;
 	width: 1.65em; height: 1.65em;
 	margin: -.1em;
@@ -448,7 +447,7 @@ li:last-of-type { border: 0px; }
 	            0 0 .5em rgba(0,0,0,.3);
 	color: white;
 	text-shadow: 0 -1px 1px rgba(0,0,0,.3);
-	text-indent: -4.5em;
+	text-indent: -4.8em;
 }
 
 :root input[type="checkbox"].ios-switch:active + div:before {

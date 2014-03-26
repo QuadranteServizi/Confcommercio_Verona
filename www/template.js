@@ -27,7 +27,7 @@ document.write('	<div class="home">');
 document.write('	<a href="menu.html"><img src="img/menu.png"></a>');
 document.write('	</div>');
 document.write('	<div class="trigger">');
-document.write('			<span><label>Notifiche<input type="checkbox" class="ios-switch" checked /></label></span>');
+document.write('			<span><label><input type="checkbox" id="notifiche" class="ios-switch" checked /></label></span>');
 document.write('	</div>');
 document.write('</div>');
 document.write('<div id="spacerhome">');
