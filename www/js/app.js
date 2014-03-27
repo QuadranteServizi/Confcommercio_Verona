@@ -79,7 +79,7 @@ function receivedEvent(id) {
         }
         function tokenHandler(result) {    
           //Quando il token è pronto lo inserisco nel database delle notifiche
-          var url='http://www.confcommercioverona.it/app/notify_newdevice.php?deviceid='+device.uuid+'&platform='+device.platform+'&model='+device.model+'&registrationId='+result;
+          var url='http://www.confcommercioverona.it/app/notify_newdevice.php?deviceid='+device.uuid+'&platform='+device.platform+'&model='+device.model+'&registrationId='+result+'&notifiche='+window.localStorage["notifiche_off"];
           //ricordarsi l'encodeURI per iOS
           var ref = window.open(encodeURI(url), '_blank','hidden=yes');
           ref.addEventListener('loadstart', function() {});
@@ -146,7 +146,7 @@ function receivedEvent(id) {
                   {
      
                     //Quando il device è pronto lo inserisco nel database delle notifiche
-                    var url='http://www.confcommercioverona.it/app/notify_newdevice.php?deviceid='+device.uuid+'&platform='+device.platform+'&model='+device.model+'&registrationId='+e.regid;
+                    var url='http://www.confcommercioverona.it/app/notify_newdevice.php?deviceid='+device.uuid+'&platform='+device.platform+'&model='+device.model+'&registrationId='+e.regid+'&notifiche='+window.localStorage["notifiche_off"];
                     var ref = window.open(url, '_blank','hidden=yes');
                     ref.addEventListener('loadstart', function() {});
                     ref.addEventListener('loadstop', function() {});
