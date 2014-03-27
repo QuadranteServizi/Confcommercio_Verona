@@ -1,28 +1,4 @@
-var check_notifiche="";
-  if (window.XMLHttpRequest)
-        {// code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp=new XMLHttpRequest();
-        }
-      else
-        {// code for IE6, IE5
-        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-        }
-      xmlhttp.onreadystatechange=function()
-        {
-         if (xmlhttp.readyState == 4) {
-                  if (xmlhttp.status == 200 || xmlhttp.status == 0) {
-      
-          check_notifiche=xmlhttp.responseText;
-          }
-          }
-        } 
-      xmlhttp.open("GET","http://www.confcommercioverona.it/app/getnotifiche.php?id="+device.uuid,true);
-      xmlhttp.send();
 
-
-alert(check_notifiche);
-
-alert("check_notifiche: "+check_notifiche);
 
 document.write('<div id="wrap">');
 document.write('	<div class="back">');
