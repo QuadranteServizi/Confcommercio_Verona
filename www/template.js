@@ -15,13 +15,16 @@ document.write('<img src="img/logo_big.png" alt="Confcommercio Verona" />');
 document.write('</div>');  
 */
 // JS is only used to add the <div>s
+
 var check_notifiche="";
+alert(window.localStorage["notifiche_off"]);
 if(window.localStorage["notifiche_off"]){
   check_notifiche = "";
 }else{
   check_notifiche = "checked";
 //default sono on
 }
+alert("check_notifiche: "+check_notifiche);
 
 document.write('<div id="wrap">');
 document.write('	<div class="back">');
@@ -33,7 +36,7 @@ document.write('	<div class="home">');
 document.write('	<a href="menu.html"><img src="img/menu.png"></a>');
 document.write('	</div>');
 document.write('	<div class="trigger">');
-document.write('			<span><label><input type="checkbox" id="notifiche" class="ios-switch" '+check_notifiche+' onclick="handleClick(this);"/></label></span>');
+document.write('			<span><label><input type="checkbox" id="notifiche" class="ios-switch" '+check_notifiche+' ontouchstart="handleClick(this);"/></label></span>');
 document.write('	</div>');
 document.write('</div>');
 document.write('<div id="spacerhome">');
