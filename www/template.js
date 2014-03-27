@@ -1,29 +1,27 @@
-/*document.write('<div class="header">');
-document.write('<h1 class="bar"></h1>');
-document.write('<div id="homebutton">');
-document.write('<a href="javascript:history.back()">');
-document.write('<img src="img/icona.png" alt="Confcommercio Verona" style="vertical-align:middle;"/>');
-document.write('</a>');
-document.write('');
-document.write('</div>');
-document.write('</div>'); 
-
-document.write('<div id="spacerhome">');
-document.write('</div>'); 
-document.write('<div id="logo-wrap">');
-document.write('<img src="img/logo_big.png" alt="Confcommercio Verona" />');
-document.write('</div>');  
-*/
-// JS is only used to add the <div>s
-
 var check_notifiche="";
-alert(window.localStorage["notifiche_off"]);
-if(window.localStorage["notifiche_off"]){
-  check_notifiche = "";
-}else{
-  check_notifiche = "checked";
-//default sono on
-}
+  if (window.XMLHttpRequest)
+        {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+        }
+      else
+        {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+      xmlhttp.onreadystatechange=function()
+        {
+         if (xmlhttp.readyState == 4) {
+                  if (xmlhttp.status == 200 || xmlhttp.status == 0) {
+      
+          check_notifiche=xmlhttp.responseText;
+          }
+          }
+        } 
+      xmlhttp.open("GET","http://www.confcommercioverona.it/app/getnotifiche.php?id="+device.uuid,true);
+      xmlhttp.send();
+
+
+alert(check_notifiche);
+
 alert("check_notifiche: "+check_notifiche);
 
 document.write('<div id="wrap">');
