@@ -8,7 +8,6 @@ function init() {
 
 function addNotify(){
     try{ 
-        alert(device.platform);  
         var pushNotification = window.plugins.pushNotification;
         if ( device.platform == 'android' || device.platform == 'Android' ){
            alert(device.platform);  
@@ -92,13 +91,22 @@ function receivedEvent(id) {
           }, 5000);
         }
         
-        function onConfirm(button,id) {
-          if(button==1){
-            window.location.replace("apri.html?notify_id="+id);
+        function onConfirm(button,id,platform) {
+          
+          if(platform=='android'){
+            if(button==2){
+              window.location.replace("apri.html?notify_id="+id);
+            }else{
+              window.location.replace("menu.html");  //ricorda che nella schermata di login non ci sono le notifiche
+            }
           }else{
-            window.location.replace("menu.html");  //ricorda che nella schermata di login non ci sono le notifiche
+            if(button==1){
+              window.location.replace("apri.html?notify_id="+id);
+            }else{
+              window.location.replace("menu.html");  //ricorda che nella schermata di login non ci sono le notifiche
+            }
           }
-        }
+        }//onConfirm
     
         // iOS
         function onNotificationAPN(event) {
@@ -111,7 +119,7 @@ function receivedEvent(id) {
                 navigator.notification.confirm(
                     res[0],                             // message
                     function(buttonIndex){
-                        onConfirm(buttonIndex, res[1]);
+                        onConfirm(buttonIndex, res[1],'ios');
                     },      
                     "Confcommercio Verona",             // title
                     'Si,No'                             // buttonLabels
@@ -159,22 +167,15 @@ function receivedEvent(id) {
                     var res = str.split("***");
     
                         var x="";
-                       /* var r=confirm(res[0]);
-                        if (r==true)
-                          {
-                          
-                          var notify_news_id=res[1]; //  id del contenuto joomla da notificare
-                          //qui per aprire la notifica in app
-                          window.open("apri.html?notify_id="+notify_news_id,"_self","location=yes");
-                          }    */
+                    //On Android 3.0 and later, the buttons will be displayed in reverse order for devices using the Holo theme.
                           
                     navigator.notification.confirm(
                     res[0],                             // message
                     function(buttonIndex){
-                        onConfirm(buttonIndex, res[1]);
+                        onConfirm(buttonIndex, res[1],'android');
                     },      
                     "Confcommercio Verona",             // title
-                    'Si,No'                             // buttonLabels
+                    'No,Si'                             // buttonLabels
                 );
     
                     break;
