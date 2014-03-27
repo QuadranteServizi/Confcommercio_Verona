@@ -9,8 +9,7 @@ function init() {
 function addNotify(){
     try{ 
         var pushNotification = window.plugins.pushNotification;
-        if ( device.platform == 'android' || device.platform == 'Android' ){
-           alert(device.platform);  
+        if ( device.platform == 'android' || device.platform == 'Android' ){ 
            pushNotification.register(
            successHandler,
            errorHandler, {
