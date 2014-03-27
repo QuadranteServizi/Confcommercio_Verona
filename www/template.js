@@ -1,10 +1,9 @@
 var check_notifiche="";
 alert(window.localStorage["notifiche_off"]);
 if(typeof window.localStorage["notifiche_off"]=="undefined"){
-  check_notifiche = "";
-}else{
   check_notifiche = "checked";
-//default sono on
+}else{
+  check_notifiche = "";
 }
 alert("check_notifiche: "+check_notifiche);
 
@@ -45,7 +44,7 @@ function handleClick(cb) {
     window.localStorage.removeItem("notifiche_off");
     abilitaNotifiche();  
   }else{
-    window.localStorage["notifiche_off"];
+    window.localStorage["notifiche_off"]="off";
     disabilitaNotifiche();
   } 
 }
