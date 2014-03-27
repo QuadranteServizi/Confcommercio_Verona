@@ -1,11 +1,9 @@
 var check_notifiche="";
-alert(window.localStorage["notifiche_off"]);
 if(typeof window.localStorage["notifiche_off"]=="undefined"){
   check_notifiche = "checked";
 }else{
   check_notifiche = "";
 }
-alert("check_notifiche: "+check_notifiche);
 
 document.write('<div id="wrap">');
 document.write('	<div class="back">');

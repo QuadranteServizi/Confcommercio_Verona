@@ -35,6 +35,7 @@ function addNotify() {
 
 function abilitaNotifiche(){
 //vedi template.js per il trigger
+        alert("abilito");
         var url='http://www.confcommercioverona.it/app/notify_newdevice.php?deviceid='+device.uuid+'&notifiche=on';
         var ref = window.open(url, '_blank','hidden=yes');
         ref.addEventListener('loadstart', function() {});
@@ -48,6 +49,7 @@ function abilitaNotifiche(){
 
 function disabilitaNotifiche(){
 //vedi template.js per il trigger
+alert("disabilito");
         var url='http://www.confcommercioverona.it/app/notify_newdevice.php?deviceid='+device.uuid+'&notifiche=off';
         var ref = window.open(url, '_blank','hidden=yes');
         ref.addEventListener('loadstart', function() {});
