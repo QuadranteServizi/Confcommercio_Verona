@@ -65,51 +65,46 @@ body {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
-/*#homebutton {
-	position: absolute;
-	top: 0px;
-	left: 10px;
-	font-weight: bold;
-	text-shadow: 0 1px 1px #444444;
-	-moz-box-align: center;
-	-webkit-box-align: center;
-	height: 100%;
-	width: 10%;
+
+/*Cose per evitare che si vedano gli overlay azzurri di selezione*/
+/*IE9*/
+*::selection 
+{
+    background-color:transparent;
+} 
+*::-moz-selection
+{
+    background-color:transparent;
 }
-#homebutton a {
-	text-decoration: none;
-	color: #ffffff;
-	font-family: Helvetica, Arial, sans-serif;
-	width: 100%;
-	height: 100%;
+*
+{        
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+    /*IE10*/
+    -ms-user-select: none;
+    user-select: none;
+
+    /*You just need this if you are only concerned with android and not desktop browsers.*/
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}    
+input[type="text"], textarea, [contenteditable]
+{
+
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
 }
-#homebutton img {
-	max-width: 100% !important;
-	max-height: 100% !important;
+
+input[type="checkbox"]
+{
+
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
 }
-#settingsbutton {
-	position: absolute;
-	top: 5px;
-	right: 15px;
-	font-weight: bold;
-	text-shadow: 0 1px 1px #444444;
-}
-#settingsbutton a {
-	text-decoration: none;
-	color: #ffffff;
-	font-family: Helvetica, Arial, sans-serif;
-}
-.app {
-	height: 50px;
-	left: 50%;
-	margin: -115px 0 0 -112px;
-	padding: 180px 0 0;
-	position: absolute;
-	text-align: center;
-	top: 80%;
-	width: 225px;
-	display: none;
-} */
+
 img {
 -webkit-user-select: none;
 -khtml-user-select: none;
@@ -124,6 +119,9 @@ a {
 -o-user-select: none;
 user-select: none;
 }
+/* Fine cose per evitare che si vedano gli overlay azzurri di selezione*/
+
+
 #menu {
 	display: block;
 	background: #f9f9da;
