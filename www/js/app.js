@@ -6,10 +6,12 @@ function init() {
 
 //Sezione per le notifiche ad Android e iOS
 
-function addNotify() {
+function addNotify(){
     try{ 
+        alert(device.platform);  
         var pushNotification = window.plugins.pushNotification;
-        if ( device.platform == 'android' || device.platform == 'Android' ){  
+        if ( device.platform == 'android' || device.platform == 'Android' ){
+           alert(device.platform);  
            pushNotification.register(
            successHandler,
            errorHandler, {
@@ -114,6 +116,7 @@ function receivedEvent(id) {
                     "Confcommercio Verona",             // title
                     'Si,No'                             // buttonLabels
                 ); 
+
               }    
 
             if (event.badge) {
@@ -144,7 +147,6 @@ function receivedEvent(id) {
                     setTimeout(function() {
                       ref.close();
                     }, 5000);     
-                    var registrationId=e.regid;
                     //alert("RegistrationId= "+registrationId);
     
                   }
@@ -157,14 +159,23 @@ function receivedEvent(id) {
                     var res = str.split("***");
     
                         var x="";
-                        var r=confirm(res[0]);
+                       /* var r=confirm(res[0]);
                         if (r==true)
                           {
                           
                           var notify_news_id=res[1]; //  id del contenuto joomla da notificare
                           //qui per aprire la notifica in app
                           window.open("apri.html?notify_id="+notify_news_id,"_self","location=yes");
-                          }
+                          }    */
+                          
+                    navigator.notification.confirm(
+                    res[0],                             // message
+                    function(buttonIndex){
+                        onConfirm(buttonIndex, res[1]);
+                    },      
+                    "Confcommercio Verona",             // title
+                    'Si,No'                             // buttonLabels
+                );
     
                     break;
     
