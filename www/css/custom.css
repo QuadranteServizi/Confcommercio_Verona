@@ -265,11 +265,13 @@ li:last-of-type {
     	margin-top:  5%;
     }
     ul li a {
-    	padding: 2%;
+    	padding: 3%;
+      height:23px;
     }
     .footer {
     	display: block;
     }
+
 
 }
 @media screen and (min-height: 280px) and (max-width: 240px) {
@@ -279,13 +281,18 @@ li:last-of-type {
     }
     ul li a {
     	padding: 2%;
+      height: 20px;
     }
     .footer {
     	display: none;
     }
     body {
-    	font-size: 10px;
+    	font-size: 13px;
     }
+          body {
+    	background: green;
+    }
+  
 
 }
 @media screen and (min-height: 450px) {
