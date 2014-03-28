@@ -126,7 +126,6 @@ user-select: none;
 
 .login
 {
-    
       -webkit-appearance: none; -moz-appearance: none;
   display: block;
   margin: 0;
@@ -251,7 +250,13 @@ li:last-of-type {
     }
     body {
     	font-size: 15px;
-    	/*background: green;*/
+    }
+    .login
+    {  
+      height: 20px;
+      line-height: 20px; font-size: 12px;
+      border: 1px solid #bbb;
+      text-align: center;
     }
 }
 @media screen and (min-height: 280px) {
@@ -265,6 +270,7 @@ li:last-of-type {
     .footer {
     	display: block;
     }
+
 }
 @media screen and (min-height: 280px) and (max-width: 240px) {
     #menu {
@@ -277,6 +283,10 @@ li:last-of-type {
     .footer {
     	display: none;
     }
+    body {
+    	font-size: 10px;
+    }
+
 }
 @media screen and (min-height: 450px) {
     #menu {
@@ -288,6 +298,16 @@ li:last-of-type {
     }
     #spacerhome {
     	margin-top: 65px;
+    }
+    body {
+    	font-size: 15px;
+    }
+    .login
+    {  
+      height: 30px;
+      line-height: 30px; font-size: 15px;
+      border: 1px solid #bbb;
+      text-align: center;
     }
 }
 @media screen and (min-height: 480px) {
@@ -303,6 +323,7 @@ li:last-of-type {
     #spacerhome {
     	margin-top: 45px;
     }
+
 }
 @media screen and (min-height: 720px) {
     ul li a {
@@ -317,6 +338,16 @@ li:last-of-type {
     }
     .titolo {
     	font-size: 22px;
+    }
+    body {
+    	font-size: 17px;
+    }
+    .login
+    {  
+      height: 40px;
+      line-height: 40px; font-size: 17px;
+      border: 1px solid #bbb;
+      text-align: center;
     }
 }
 
