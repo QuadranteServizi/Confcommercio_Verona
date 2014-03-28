@@ -114,7 +114,16 @@ user-select: none;
 }
 /* Fine cose per evitare che si vedano gli overlay azzurri di selezione*/
 
-
+.login
+{
+      -webkit-appearance: none; -moz-appearance: none;
+  display: block;
+  margin: 0;
+  width: 50%; height: 40px;
+  line-height: 40px; font-size: 14px;
+  border: 1px solid #bbb;
+  text-align: center;
+}
 
 #menu {
 	display: block;
