@@ -94,7 +94,10 @@ input[type="text"], textarea, [contenteditable]
     -moz-user-select: text;
     -ms-user-select: text;
     user-select: text;
+
 }
+
+
 
 input[type="checkbox"]
 {
@@ -123,10 +126,14 @@ user-select: none;
 
 .login
 {
-    font-size: 14pt;
-    height: 40px;
-    width:30%;
-    text-align: center;
+    
+      -webkit-appearance: none; -moz-appearance: none;
+  display: block;
+  margin: 0;
+  width: 50%; height: 40px;
+  line-height: 40px; font-size: 14px;
+  border: 1px solid #bbb;
+  text-align: center;
 }
 
 #menu {
