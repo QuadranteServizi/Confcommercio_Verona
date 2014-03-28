@@ -10,14 +10,14 @@
 <script type="text/javascript" src="js/PushNotification.js"></script>                      
 <script type="text/javascript" src="js/des.js"></script>               	       
 <script type="text/javascript" src="js/index.js"></script>                       
-<script type="text/javascript" src="template.js"></script>                                          
+<script type="text/javascript" src="template_login.js"></script>                                          
   </head>                           
   <body class="corpo" onload="init()">    
     
 
 <h1 class="titolo">Configurazione</h1>
        <div align="center">
-       <p>Credenziali di accesso al sito web www.confcommercioverona.it</p> <br>
+       <p>Impostazione delle credenziali di accesso al sito web www.confcommercioverona.it</p> <br>
 
 <div id="launcherPage">
   <p align="center"></p>
@@ -30,16 +30,16 @@
 
         <form id="loginForm" onsubmit="handleLogin()">
         
-            <label for="username">Username:</label>
-            <input type="text" name="username" id="username" value="" placeholder="Username" autocapitalize="off"/>
+            <label for="username"></label>
+            <input type="text" name="username" id="username" value="" placeholder="Username" autocapitalize="off" class="login" tabindex="1"/>
    
             <br>
        
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password" value="" placeholder="Password" autocapitalize="off" />
+            <label for="password"></label>
+            <input type="password" name="password" id="password" value="" placeholder="Password" autocapitalize="off" class="login" tabindex="2"/>
             <br>
 
-        <input type="submit" value="Login" id="submitButton">
+        <input type="submit" value="Accedi" id="submitButton"  class="login" tabindex="3">
         </form>
         
     </div>

@@ -121,6 +121,13 @@ user-select: none;
 }
 /* Fine cose per evitare che si vedano gli overlay azzurri di selezione*/
 
+.login
+{
+    font-size: 14pt;
+    height: 40px;
+    width:30%;
+    text-align: center;
+}
 
 #menu {
 	display: block;
